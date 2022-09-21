@@ -289,7 +289,7 @@ ggplot(ref_coefs, aes(x = estimate, y = term, colour = signif)) +
 
 ```{r langcoefs,  fig.width=14, fig.height=7, fig.cap="Estimates of coefficients in predicting words' developmental trajectories for all languages and measures. Each point represents a predictor's coefficient in one language, with the bar showing the mean across languages. Only coefficients for which $p < 0.05$ are presented."}
 
-plt_lang_coefs$term <- factor(plt_lang_coefs$term, levels=c("Freq", "Concreteness", "MLU-w", "Babiness", "N affix", "N cat", "N type", "Length char", "Predicates", "Nouns", "Per frame"))
+plt_lang_coefs$term <- factor(plt_lang_coefs$term, levels=c("Freq", "Concreteness", "MLU-w", "Babiness", "N affix", "N cat", "N type", "Length char", "Predicates", "Nouns"))
 
 # %>% filter(signif=="significant")
 ggplot(plt_lang_coefs, aes(x = estimate, y = term)) +
@@ -306,8 +306,8 @@ ggplot(plt_lang_coefs, aes(x = estimate, y = term)) +
   theme(legend.position="none") +
   langcog::theme_mikabr() + 
   theme_bw()+
-  xlim(-3,+3)+
-  ggtitle("Main predictor coefficients across languages ")
+  ggtitle("Main predictor coefficients across languages ") +
+  xlim(-2.5, 2.5)
 ggsave("data/plots/main.png")
 
 ```
@@ -316,7 +316,7 @@ ggsave("data/plots/main.png")
 
 ### Cross-linguistic predictor effects
 
-```{r consistency,eval=FALSE, fig.width=14, fig.height=7, fig.cap="Correlations of coefficient estimates between languages. Each point represents the mean of one language's coefficients' correlation with each other language's coefficients, with the vertical line indicating the overall mean across languages. The shaded region and line show a bootstrapped 95\\% confidence interval for a randomized baseline where predictor coefficients are shuffled within language."}
+```{r consistency, fig.width=14, fig.height=7, fig.cap="Correlations of coefficient estimates between languages. Each point represents the mean of one language's coefficients' correlation with each other language's coefficients, with the vertical line indicating the overall mean across languages. The shaded region and line show a bootstrapped 95\\% confidence interval for a randomized baseline where predictor coefficients are shuffled within language."}
 
 baseline_sample <- function(i) {
   aoa_coefs %>%
@@ -330,10 +330,8 @@ baseline_sample <- function(i) {
 
 
 coef_cors <- function(coefs) {
-  coefs$language <- factor(coefs$language, levels)#=c( "Swedish",  
-             #    "German", 
-            #      "Portuguese (European)", "Hungarian"))
-  coefs$term <- factor(coefs$term)#, levels=c("freq", "freq_solo", "mlu", "concreteness", "babiness", "length_char", "n_cat", "n_affix", "n_type"))
+  coefs$language <- factor(coefs$language) #levels=c( "Swedish",   "German",  "Portuguese (European)", "Hungarian")
+  coefs$term <- factor(coefs$term)#levels=c("freq", "freq_solo", "mlu", "concreteness", "babiness", "length_char", "n_cat", "n_affix", "n_type")
   suppressWarnings(
     coefs %>%
       filter(!is.na(term)) %>%
@@ -544,8 +542,7 @@ ggplot(plt_lexcat_coefs, aes(x = estimate, y = term, colour = term)) +
   geom_vline(xintercept = 0, color = "grey", linetype = "dotted") +
   scale_colour_ptol(guide = FALSE) +
   theme_bw()+
-  labs(x = "Coefficient estimate", y = "")+
-  xlim(-3,3)
+  labs(x = "Coefficient estimate", y = "")
 ggsave("data/plots/interaction.png")
 
 ```
@@ -577,24 +574,6 @@ cv_dev_lang<- function(cv_across_lang){
 cv_results |>
    cv_dev_lang()
 
-
-ggplot(cv_results_lex|>filter(measure =="produces"), aes(x = mean_abs_dev , y = language)) +
-    facet_grid(~lexical_category, scales = "free") +
-    geom_pointrange(aes(colour = language,
-                        xmin = sd_abs_dev,
-                        xmax = sd_abs_dev))+
-    scale_shape_manual(values = c(19, 21), guide = "none") +
-    labs(y = "", x = "Mean absolute deviance (by month)")+
-    #xlim(0,10) +
-    #theme(axis.text.x = element_text(angle = 30))+
-    theme(legend.position="none")+
-    theme_bw()
-
-
-
-
-
-
 aoa_mad_lex_cat<- function(cv_across_lex, lang, meas, wb_data, preds ){
   
   cv_across <- cv_across_lex %>%
@@ -617,34 +596,6 @@ aoa_mad_lex_cat<- function(cv_across_lex, lang, meas, wb_data, preds ){
   ggplot(mad_aoa, aes(y = count, x =type, fill=lexical_category)) +
     geom_bar(stat="identity")
 }
-
-
-aoa_mad_cat<- function(cv_results_cat, lang, meas, wb_data){
-  
-  cv_across <- cv_results_cat %>%
-    # filter(pred_ %in% preds ) %>%
-    group_by(language, category) %>%
-    summarise(mad=n()) %>%
-    mutate(mad=mad/sum(mad))
-  
-  cv_across <- wb_data %>%
-    unnest(items) %>%
-    group_by(category) %>%
-    summarise(aoa=n()) %>%
-    mutate(aoa=aoa/sum(aoa)) %>%
-   # rename(lexical_category=lexical_class) %>%
-    left_join(cv_across)
-  
-  mad_aoa <- cv_across %>%
-    pivot_longer(category, names_to = "type", values_to = "count")
-  
-  ggplot(mad_aoa, aes(y = count, x =type, fill=category)) +
-    geom_bar(stat="identity")
-}
-
-
-
-
 
 
 dev_words <- function(cv_across_lex){
@@ -688,7 +639,6 @@ dev_words(eng_across_lang_lex_desc)
    scale_color_brewer(palette = "Set1") +
    theme_bw(base_size = 14) +
    theme(panel.grid = element_blank())
- ggsave("data/plots/xvalpos.png")
  
 #man_t_across_lang_lex_desc<- readRDS("data/man_t_across_lang_lex_desc.rds" )
 
@@ -729,7 +679,7 @@ worst_produce <- readRDS("data/plots/worst_uni_produce.rds" )
 worst_understand <- readRDS("data/plots/worst_uni_understand.rds" )
 
 
-ggplot(aes(x = aoa_mean, y = aoa_pred_mean),data = worst_produce %>% filter(count_lang >5)) +
+ggplot(aes(x = aoa_mean, y = aoa_pred_mean),data = worst_produce %>% filter(count_lang >1)) +
    geom_smooth(method = "lm") +
    geom_point(aes(size = count_lang), alpha=0.5)+
    ggrepel::geom_text_repel(data = . %>% 
