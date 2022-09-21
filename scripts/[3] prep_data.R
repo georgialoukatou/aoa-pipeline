@@ -4,6 +4,10 @@
 
 # transform any column that starts with "count" by smoothing (add 1),
 # normalizing, and log transforming, then rename "count_x" to "freq_x"
+
+l_with_n_affix = c("Spanish (Mexican)", "French (French)", "French (Quebecois)", "Spanish (European)", "German", "Swedish", "Portuguese (European)", "Hungarian")
+
+
 transform_counts <- function(childes_metrics, smooth = TRUE, normalize = TRUE,
                              log_transform = TRUE) {
   trans_metrics <- childes_metrics |> group_by(language)
@@ -113,8 +117,7 @@ residualize_morph_c <- function(childes_metrics) {
 
 
 residualize_morph <- function(lang, childes_metrics) {
-  l1 = c("Spanish (Mexican)", "French (French)", "French (Quebecois)", "Spanish (European)", "German", "Swedish", "Portuguese (European)", "Hungarian")
-  if (lang %in% l1){
+  if (lang %in% l_with_n_affix){
   a<-  childes_metrics |>
     filter(!is.na(n_type)) |>
     filter(!is.na(n_affix)) |>
@@ -205,18 +208,19 @@ do_lang_imputation <- function(language, data, pred_sources, max_steps) {
   # if all the predictors are from one source, fix the pred_sources
   if (length(pred_sources) == 1) pred_sources <- unlist(pred_sources)
 
+  data[colSums(!is.na(data)) > 0]
 
-  l1 = c("Spanish (Mexican)", "French (French)", "French (Quebecois)", "Spanish (European)", "German", "Swedish", "Portuguese (European)", "Hungarian")
-  if (language %in% l1){
+  predictors <- unlist(pred_sources)
+
+  if (language %in% l_with_n_affix){
     predictors <- unlist(pred_sources)
   } else{
     predictors <- unlist(pred_sources)
-    predictors = predictors[predictors!= "n_affix"]
+    predictors = predictors[predictors!= "n_affix"]  ##sometimes this does not work, eg for Dutch
     }
 
   print(glue("Imputing {language} with {max_steps} steps..."))
   predictor_list <- get_predictor_order(data, predictors, max_steps)
-  # what do we do if a language is missing a predictor entirely?
   missing_data <- get_missing_data(data, predictors)
   imputed_data <- get_imputation_seed(data, predictors)
   imputed_data <- do_iterate_imputation(pred_sources, imputed_data,
@@ -225,9 +229,15 @@ do_lang_imputation <- function(language, data, pred_sources, max_steps) {
   return(imputed_data)
 }
 
-do_full_imputation <- function(model_data, pred_sources, max_steps) {
+do_full_imputation <- function(language, model_data, pred_sources, max_steps) {
   # restrict to the sources in pred_sources
   # catch cases where a predictor in the predictor set isn't in the data
+
+  l = normalize_language(language)
+  file__ <-  glue("{childes_path}/imputed_scaled_{l}.rds")
+  if (file.exists(file__)) {
+    imputed_data <- readRDS(file__)
+  }else{
 
   pred_sources <- map(pred_sources, \(ps) discard(ps, \(p) all(is.na(model_data[[p]]))))
   nested_data <- model_data |>
@@ -237,15 +247,20 @@ do_full_imputation <- function(model_data, pred_sources, max_steps) {
     group_by(language) |>
     nest()
 
+
   imputed_data <- nested_data |>
     mutate(imputed = purrr::map2(language, data, function(lang, dat) {
       do_lang_imputation(lang, dat, pred_sources, max_steps)
     }))
 
-  imputed_data |>
+  imputed_data <- imputed_data |>
     ungroup() |>
     select(language, imputed) |>
-    unnest(imputed)
+    unnest(imputed) |>
+    distinct()
+  saveRDS(imputed_data, file__)
+  }
+  return(imputed_data)
 }
 
 
@@ -257,9 +272,9 @@ do_scaling <- function(model_data, predictors) {
 }
 
 
-prep_lexcat <- function(predictor_data, uni_lemmas, ref_value) {
+prep_lexcat <- function(language, predictor_data, uni_lemmas, ref_value) {
   lexical_categories <- uni_lemmas |>
-    unnest(cols = "items") |>
+   # unnest(cols = "items") |>
    # filter(!lexical_class=="adverbs") |>
     distinct() |>
     # uni_lemmas with item in multiple different classes treated as "other"
@@ -279,7 +294,8 @@ prep_lexcat <- function(predictor_data, uni_lemmas, ref_value) {
     left_join(lexical_categories) |>
     filter(!is.na(uni_lemma))  |>
     filter(!is.na(lexical_category)) |>
-    filter(!(language == "Russian" & category == "sounds"))
+    filter(!(language == "Russian" & category == "sounds")) |>
+    distinct()
 }
 
 

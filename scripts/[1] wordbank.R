@@ -32,7 +32,7 @@ get_inst_words <- function(language, form) {
   message(glue("Getting words for {language} {form}..."))
   get_item_data(language = language, form = form) |>
     filter(type == "word") |>
-    select(language, form, lexical_class, category, uni_lemma, definition,
+    select(language, form, lexical_class, category, uni_lemma, item_definition,
            item_id, num_item_id)
 }
 
@@ -154,12 +154,47 @@ load_wb_data <- function(languages, cache = TRUE) {
   return(wb_data)
 }
 
-extract_uni_lemmas <- function(wb_data) {
-  wb_data |>
+#extract_uni_lemmas <- function(lang, wb_data) {
+#  uni_lemmas <- wb_data |>
+#    filter(language == lang)|>
+#    filter(!is.na(uni_lemma)) |>
+#    distinct(language, uni_lemma, items) |>
+#    unnest(items) |>
+#    select(-c(form,item_id)) |>
+#    distinct() |>
+#    nest(items = -c(language, uni_lemma))
+
+#  uni_lemmas <- uni_lemmas |>
+#    unnest(items)
+#  if("definition" %in% colnames(uni_lemmas)){
+#    uni_lemmas <- uni_lemmas |>
+#      rename(item_definition = definition)
+#  }else{
+#  }
+#  uni_lemmas <- uni_lemmas %>%
+#    nest(items = c(lexical_class, category, item_definition))
+
+#}
+
+extract_uni_lemmas <- function(lang, wb_data) {
+  uni_lemmas<-wb_data |>
+    filter(language == lang)|>
     filter(!is.na(uni_lemma)) |>
     distinct(language, uni_lemma, items) |>
     unnest(items) |>
     select(-c(form,item_id)) |>
     distinct() |>
     nest(items = -c(language, uni_lemma))
+  uni_lemmas <- uni_lemmas |>
+    unnest(items)
+  uni_lemmas <- uni_lemmas[colSums(!is.na(uni_lemmas)) > 0]
+
+
+  if("definition" %in% colnames(uni_lemmas)){
+    uni_lemmas <- uni_lemmas |>
+      rename(item_definition = definition)
+  }else{
+  }
+  return(uni_lemmas)
 }
+

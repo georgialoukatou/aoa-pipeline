@@ -45,8 +45,7 @@ compute_length_phon <- function(metric_data) {
 compute_verb_frame_df <- function(metric_data){
 
   l<- metric_data$language[1]
-  childes_lang <- convert_lang_childes(l)
-  file_ <-  glue("{childes_path}/morph_{childes_lang}.rds")
+  file_ <-  glue("{childes_path}/morph_{l}.rds")
   morph <- readRDS(file_)
   morph <- morph |>
     distinct()
@@ -56,7 +55,7 @@ compute_verb_frame_df <- function(metric_data){
 
 
   l1 = c("deu", "tur", "nld")
-  if (childes_lang %in% l1){
+  if (l %in% l1){
 
     morph$next_pos_[morph$utterance_id == lag(morph$utterance_id, n=1, default=NA) & !is.na(morph$utterance_id)] <- "same_utt"
     morph$next_pos2_[morph$utterance_id == lag(morph$utterance_id, n=2, default=NA) & !is.na(morph$utterance_id)] <- "same_utt"
@@ -108,12 +107,7 @@ compute_verb_frame_df <- function(metric_data){
 
 compute_verb_frame <- function(metric_data){
   print("Computing verb frames")
-  #file_u <- glue("{childes_path}/verb_frames_{childes_lang}.rds")
-  #if (file.exists(file_u)) {
-  #  aa <- readRDS(file_u)
-  #} else {
     morph<-compute_verb_frame_df(metric_data)
-    #saveRDS(morph, file_u)
   tmp_data <- metric_data |>
     select(token_id, token, utterance_id) |>
     left_join(morph)
@@ -147,16 +141,12 @@ comma_sep = function(x) {
 
 compute_n_sfx_cat <-function(metric_data){
   print("Computing number of morphemes and categories")
-  #file_u <- glue("{childes_path}/n_sfx_cat_{childes_lang}.rds")
-  #if (file.exists(file_u)) {
-  #  morph <- readRDS(file_u)
-  #} else {
   l<- metric_data$language[1]
   print("morph file")
-  childes_lang <- convert_lang_childes(l)
-  file_ <-glue("{childes_path}/morph_{childes_lang}.rds")
+  file_ <- file.path(childes_path, glue("morph_{l}.rds"))
   morph <- readRDS(file_) |>
     rename(gloss= gloss_m)
+
   if("n_morpheme" %in% colnames(morph)){
   morph2 <- metric_data |>
     left_join(morph) |>
@@ -184,20 +174,14 @@ compute_n_sfx_cat <-function(metric_data){
   }
     morph2$pos = str_replace_all(morph2$pos,"V.PTCP","V")
     morph <- morph2 |> distinct()
-    #saveRDS(morph, file_u)
     print(morph)
 }
 
 
 compute_n_type <- function(metric_data){
   print("Computing number of types")
-  #file_u <- glue("{childes_path}/n_type_{childes_lang}.rds")
-  #if (file.exists(file_u)) {
-  #  last <- readRDS(file_u)
-  #} else {
   l<- metric_data$language[1]
-  childes_lang <- convert_lang_childes(l)
-  file_ <-glue("{childes_path}/morph_{childes_lang}.rds")
+  file_ <- file.path(childes_path, glue("morph_{l}.rds"))
   morph <- readRDS(file_) |>
     rename(gloss= gloss_m)
   tmp <- metric_data |>
@@ -224,16 +208,13 @@ compute_n_type <- function(metric_data){
               #token_types = paste(token_types, collapse=","),
               token_stem = paste(token_stem, collapse=",")) |>
     rename(token = gloss)
-  #saveRDS(last, file_u)
-  #}
   print(last)
 }
 
 compute_prefix <- function(metric_data){
   print("Computing prefixes")
   l<- metric_data$language[1]
-  childes_lang <- convert_lang_childes(l)
-  file_ <- ("~/Documents/aoa_pipeline/data/childes/morph_{childes_lang}.rds")
+  file_ <- glue("{childes_path}/morph_{l}.rds")
   morph <- readRDS(file_)
   metric_data |>
     left_join(morph) |>
@@ -367,12 +348,10 @@ build_uni_lemma_map <- function(uni_lemmas) {
     map_df(build_special_case_map) |>
     group_by(language, uni_lemma, definition) |>
     summarise(special_cases = list(option))
-
-
   uni_lemmas |>
     unnest(items) |>
     left_join(special_case_map) |>
-    mutate(option = pmap(list(language, definition, special_cases), #be careful dutch has item_definition
+    mutate(option = pmap(list(language, definition, special_cases), #be careful Dutch and Hungarian has item_definition instead of definition
                          build_options)) |>
     select(language, uni_lemma, option) |>
     unnest(option) |>
