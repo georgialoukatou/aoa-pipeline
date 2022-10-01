@@ -3,85 +3,71 @@ get_inst_admins <- function(language, form, exclude_longitudinal = TRUE) {
 
   admins <- get_administration_data(language = language,
                                     form = form,
-                                    original_ids = TRUE)
-
-   if (is.na(unique(admins$original_id[1]))==TRUE){
-    admins <- admins %>%
-      select(-(original_id)) %>%
-      rename(original_id = data_id)
-  }
+                                    db_args = db_args)
 
   if (exclude_longitudinal) {
     # take earliest administration for any child with multiple administrations
     admins <- admins |>
-      mutate(source_group = str_replace(source_name, " \\(.*\\)", "")) |>
-      group_by(source_group, original_id) |>
+      group_by(dataset_origin_name, child_id) |>
       slice_min(age, with_ties = FALSE) |>
       ungroup()
 
   }
- if (!("data_id" %in% colnames(admins))){
-   admins <- admins %>%
-   rename(data_id = original_id)
- }
 
   admins |> select(language, form, age, data_id)
 }
 
 get_inst_words <- function(language, form) {
   message(glue("Getting words for {language} {form}..."))
-  get_item_data(language = language, form = form) |>
-    filter(type == "word") |>
+  get_item_data(language = language,
+                form = form,
+                db_args = db_args) |>
+    filter(item_kind == "word") |>
     select(language, form, lexical_class, category, uni_lemma, item_definition,
-           item_id, num_item_id)
+           item_id)
 }
 
-get_inst_data <- function(language, form, admins, items) {
+get_inst_data <- function(language, form, admins, items,
+                          custom_unilemmas = TRUE) {
   message(glue("Getting data for {language} {form}..."))
 
-  if (language !="Portuguese (European)"){
-  get_instrument_data(language = language,
-                      form = form,
-                      items = items$item_id,
-                      administrations = admins,
-                      iteminfo = items) |>
-    mutate(produces = !is.na(value) & value == "produces",
-           understands = !is.na(value) &
-             (value == "understands" | value == "produces")) |>
+  # temp solution:
+  items <- items |> mutate(form_type = "")
+
+  inst_data <- get_instrument_data(language = language,
+                                   form = form,
+                                   items = items$item_id,
+                                   administration_info = admins,
+                                   item_info = items,
+                                   db_args = db_args) |>
     select(-value) |>
     pivot_longer(names_to = "measure", values_to = "value",
                  cols = c(produces, understands)) |>
-    filter(measure == "produces" | form == "WG") |>
-    select(-num_item_id) |>
-    filter(!is.na(uni_lemma))
-  }else{
-    unil <- read_csv("data/wordbank/portuguese_unilemmas.csv") %>%
-      select(uni_lemma, definition, category)
-    get_instrument_data(language = language,
-                        form = form,
-                        items = items$item_id,
-                        administrations = admins,
-                        iteminfo = items) |>
-      mutate(produces = !is.na(value) & value == "produces",
-             understands = !is.na(value) &
-               (value == "understands" | value == "produces")) |>
-      select(-value) |>
-      pivot_longer(names_to = "measure", values_to = "value",
-                   cols = c(produces, understands)) |>
-      filter(measure == "produces" | form == "WG") |>
-      select(-num_item_id, -uni_lemma) |>
-      left_join(unil) |>
-      filter(!is.na(uni_lemma))
+    filter(measure == "produces" | form == "WG")
+
+  if (custom_unilemmas) {
+    norm_lang <- normalize_language(language)
+    unilemma_loc <- glue("{wb_path}/unilemmas/{norm_lang}_unilemmas.csv")
+    if (file.exists(unilemma_loc)) {
+      unilemma_data <- read_csv(unilemma_loc) |>
+        select(definition, category, uni_lemma)
+      inst_data <- inst_data |>
+        select(-uni_lemma) |>
+        left_join(unilemma_data,
+                  by = c("item_definition" = "definition", "category"))
+    }
   }
+  inst_data |>
+    filter(!is.na(uni_lemma))
 }
 
 collapse_inst_data <- function(inst_data) {
   message(glue("Collapsing data for {unique(inst_data$language)} {unique(inst_data$form)}..."))
 
   inst_uni_lemmas <- inst_data |>
-    distinct(measure, uni_lemma, lexical_class, category, item_id, definition) |>
+    distinct(measure, uni_lemma, lexical_class, category, item_id, item_definition) |>
     group_by(uni_lemma) |>
-    nest(items = c(lexical_class, category, item_id, definition))
+    nest(items = c(lexical_class, category, item_id, item_definition))
 
   inst_data |>
     filter(!is.na(value)) |>
@@ -93,7 +79,6 @@ collapse_inst_data <- function(inst_data) {
     summarise(num_true = sum(uni_value), total = n()) |>
     ungroup() |>
     left_join(inst_uni_lemmas)
-
 }
 
 combine_form_data <- function(inst_summaries) {
@@ -107,34 +92,36 @@ combine_form_data <- function(inst_summaries) {
     ungroup()
 }
 
-create_inst_data <- function(language, form) {
+create_inst_data <- function(language, form, custom_unilemmas = TRUE) {
   inst_admins <- get_inst_admins(language, form)
   inst_words <- get_inst_words(language, form)
-  get_inst_data(language, form, inst_admins, inst_words)
+  get_inst_data(language, form, inst_admins, inst_words, custom_unilemmas)
 }
 
-create_wb_data <- function(language, write = TRUE) {
+create_wb_data <- function(language, write = TRUE, custom_unilemmas = TRUE) {
   lang <- language # for filter name scope issues
-  insts <- get_instruments()
+  insts <- get_instruments(db_args = db_args)
   forms <- insts |> filter(language == lang) |> pull(form)
   if (length(forms) == 0) {
     message(glue("\tNo instruments found for language {lang}, skipping."))
     return()
   }
 
-  lang_datas <- map(forms, partial(create_inst_data, language = language))
+  lang_datas <- map(forms, partial(create_inst_data,
+                                   language = language,
+                                   custom_unilemmas = custom_unilemmas))
   lang_summaries <- map(lang_datas, collapse_inst_data)
   lang_summary <- combine_form_data(lang_summaries)
 
   if (write) {
-    lang_label <- normalize_language(language)
-    saveRDS(lang_summary, file = glue("{wb_path}/{lang_label}.rds"))
+    norm_lang <- normalize_language(language)
+    saveRDS(lang_summary, file = glue("{wb_path}/{norm_lang}.rds"))
   }
   return(lang_summary)
 }
 
 load_wb_data <- function(languages, cache = TRUE) {
-   wb_data <- map_df(languages, function(lang) {
+  wb_data <- map_df(languages, function(lang) {
     norm_lang <- normalize_language(lang)
     lang_file <- glue("{wb_path}/{norm_lang}.rds")
     if (file.exists(lang_file)) {
@@ -153,28 +140,6 @@ load_wb_data <- function(languages, cache = TRUE) {
   })
   return(wb_data)
 }
-
-#extract_uni_lemmas <- function(lang, wb_data) {
-#  uni_lemmas <- wb_data |>
-#    filter(language == lang)|>
-#    filter(!is.na(uni_lemma)) |>
-#    distinct(language, uni_lemma, items) |>
-#    unnest(items) |>
-#    select(-c(form,item_id)) |>
-#    distinct() |>
-#    nest(items = -c(language, uni_lemma))
-
-#  uni_lemmas <- uni_lemmas |>
-#    unnest(items)
-#  if("definition" %in% colnames(uni_lemmas)){
-#    uni_lemmas <- uni_lemmas |>
-#      rename(item_definition = definition)
-#  }else{
-#  }
-#  uni_lemmas <- uni_lemmas %>%
-#    nest(items = c(lexical_class, category, item_definition))
-
-#}
 
 extract_uni_lemmas <- function(lang, wb_data) {
   uni_lemmas<-wb_data |>
@@ -195,6 +160,4 @@ extract_uni_lemmas <- function(lang, wb_data) {
       rename(item_definition = definition)
   }else{
   }
-  return(uni_lemmas)
 }
-
