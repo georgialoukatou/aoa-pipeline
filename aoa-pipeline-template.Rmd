@@ -39,11 +39,11 @@ eng_wb_data
 
 Defining languages:
 ```{r define_langs}
-#Croatian russian eng aust
 
-target_langs<-c("English (American)","Italian","Norwegian", "Turkish", "Swedish", "Danish", "Dutch","French (French)","French (Quebecois)", "Portuguese (European)","Hungarian","Spanish (Mexican)", "Spanish (European)",  "German")
+target_langs<-c("Spanish (Mexican)", "Spanish (European)",  "German",  "English (American)","Italian", "Norwegian", "Turkish", "Swedish", "Danish", "Dutch","French (French)","French (Quebecois)", "Portuguese (European)","Hungarian")
 
-langs_with_n_affix = c("Spanish (Mexican)", "French (French)", "French (Quebecois)", "Spanish (European)", "German", "Swedish", "Portuguese (European)", "Hungarian")
+#"Croatian" no morphology
+# Russian : transliteration of morphology
 
 sinotibetan_languages <- c("Mandarin (Taiwanese)", "Mandarin (Beijing)")
 ```
@@ -159,6 +159,9 @@ By default, `transform_counts()` transforms any column that starts with "count" 
 ```{r prepare_frequency}
 
 childes_metrics <- childes_metrics |> transform_counts() |> residualize_freqs() 
+```
+
+```{r prepare_morphology}
 childes_metrics <- map_df(target_langs, residualize_morph, childes_metrics)
 ```
 
@@ -224,12 +227,22 @@ aoa_predictor_data <- predictor_data_imputed_scaled |> left_join(aoas) |>## merg
 ```{r}
 
 run_main_model<-function(lang, aoa_predictor_data, predictors, uni_lemmas, ref_cat, lexcat_interactions = TRUE){
+  print(lang)
+  df = aoa_predictor_data|>filter(language ==lang)
+  
+  if (!(is.data.frame(df) && nrow(df)==0)){
 
-   if (lang %in% langs_with_n_affix){
-    print(predictors)
-  } else {
+  if (all(is.na(df[,"n_type"]))) {    
+    predictors = predictors[predictors!= "n_type"]
+  }
+  if (all(is.na(df[,"n_affix"]))) {    
     predictors = predictors[predictors!= "n_affix"]
-    print(predictors)
+  }
+  if (all(is.na(df[,"n_cat"]))) {    
+    predictors = predictors[predictors!= "n_cat"]
+  }
+    if (all(is.na(df[,"per_frame"]))) {    
+    predictors = predictors[predictors!= "per_frame"]
   }
   if (lang %in% sinotibetan_languages){
     predictors = predictors[predictors!= "length_char"]
@@ -237,18 +250,23 @@ run_main_model<-function(lang, aoa_predictor_data, predictors, uni_lemmas, ref_c
 
   aoa_predictor_data <- aoa_predictor_data|> select(-lexical_category)|>
     filter(language==lang)
-  
-  aoa_predictor_data_lexcat <- prep_lexcat(aoa_predictor_data, uni_lemmas |> filter(language==lang), ref_cat) ## Set again lexical category contrasts
 
-
-  m<-fit_models(predictors, aoa_predictor_data_lexcat, lexcat_interactions) |> 
+   aoa_predictor_data_lexcat  <- prep_lexcat(aoa_predictor_data, uni_lemmas |> filter(language==lang), ref_cat) ## Set again lexical category contrasts
+   m <- fit_models(predictors, aoa_predictor_data_lexcat, lexcat_interactions) |> 
     mutate(language=lang)
   
-  return(m)
+   return(m)
+  }
+  else{
+    return(NULL)
+    }
 }
 
-aoa_models <- map_df(target_langs, run_main_model, aoa_predictor_data, predictors, uni_lemmas, ref_cat)
+aoa_models <- map_df(target_langs, run_main_model, aoa_predictor_data, predictors, uni_lemmas, ref_cat) |>unnest(coefs)
 
+target_langs <- unique(aoa_models$language)  
+
+#Some languages may not have enough resources to fit models, remove by target_langs
 ```
 
 ## Add per_frame feature only for verbs
@@ -268,17 +286,26 @@ aoa_models_verb <- map_df(target_langs, run_main_model, aoa_predictor_data|>filt
 
 
 aoa_models_verb <- aoa_models_verb |> unnest(coefs) |>filter(term =="per_frame") 
+common <- intersect(colnames(aoa_models), colnames(aoa_models_verb))
 
 to_add <- aoa_models |>
   select(language, measure, group_data, stats, vifs)
 
-aoa_models <- aoa_models |> 
-  unnest(coefs) |>
-  rbind(aoa_models_verb) |>
-  select(-c(group_data,stats, model, vifs )) |>
-  nest(coefs =c(term, estimate, std.error, statistic, p.value)) |>
-  left_join(to_add)
-  
+
+#row-bind only on common column names
+if (!(is.data.frame(aoa_models_verb) && nrow(aoa_models_verb)==0)){
+
+  aoa_models <- rbind(aoa_models[common], aoa_models_verb[common])|>
+    select(-c(group_data,stats, vifs )) |>
+    nest(coefs =c(term, estimate, std.error, statistic, p.value)) |>
+    left_join(to_add)
+  } else {
+  aoa_models <- aoa_models|>
+  nest(coefs =c(term, estimate, std.error, statistic, p.value))
+}  
+
+
+
 ```
 
 ## Model outputs
@@ -308,19 +335,26 @@ aoa_models |> select(language, measure, vifs) |> unnest(vifs)
 
 run_cross_validation_model<-function(lang, meas, aoa_predictor_data, predictors, uni_lemmas, ref_cat){
   l = normalize_language(lang)
+
   aoa_predictor_data <- aoa_predictor_data|> select(-lexical_category)|>
     filter(language==lang, measure==meas)
   
   aoa_predictor_data_lexcat <- prep_lexcat(aoa_predictor_data, uni_lemmas |> filter(language==lang), ref_cat) ## Set again lexical category contrasts
 
-  
-   if (lang %in% langs_with_n_affix ){
-    print(predictors)
-  } else {
-    predictors = predictors[predictors!= "n_affix"]
-    print(predictors)
+  df = aoa_predictor_data|>filter(language ==lang)
+
+  if (all(is.na(df[,"n_type"]))) {    
+    predictors = predictors[predictors!= "n_type"]
   }
-    
+  if (all(is.na(df[,"n_affix"]))) {    
+    predictors = predictors[predictors!= "n_affix"]
+  }
+  if (all(is.na(df[,"n_cat"]))) {    
+    predictors = predictors[predictors!= "n_cat"]
+  }
+    if (all(is.na(df[,"per_frame"]))) {    
+    predictors = predictors[predictors!= "per_frame"]
+  }
   if (lang %in% sinotibetan_languages){
     predictors = predictors[predictors!= "length_char"]
   }  
@@ -332,7 +366,9 @@ loo_df <- aoa_predictor_data_lexcat |>
     loo_models = ifelse(language %in% sinotibetan_languages, map(data, fit_cv_models, list(make_predictor_formula(predictors))), map(data, fit_cv_models, list(make_predictor_formula(predictors)))),
          loo_preds = map2(loo_models, data, get_cv_preds),
          cv_results = map(loo_preds, get_cv_results))  
+
 return(loo_df)
+
 }
 
 ```
