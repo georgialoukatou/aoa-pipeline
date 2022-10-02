@@ -13,13 +13,16 @@ saveRDS(unimorph, "data/unimorph_spa.tsv")
 
 
 morphnet_extract <- function(childes_lang){
-  f <- file.path(glue("/Users/loukatou/Documents/aoa-pipeline/data/unimorph_{childes_lang}.tsv"))
+  f <- file.path(glue("data/unimorph_{childes_lang}.tsv"))
   unimorph <- read.csv(f, sep = "\t")
 
-  d <- file.path(glue("/Users/loukatou/Documents/aoa-pipeline/data/unimorph_{childes_lang}_der.tsv"))
+  d <- file.path(glue("data/unimorph_{childes_lang}_der.tsv"))
   unimorph_dev <- read.csv(d, sep = "\t")
 
   childes<- get_childes_data({childes_lang}, corpus_args)
+  if (childes_lang == "eng"){
+    childes = childes[1:500000, ]
+  }
 
   colnames(unimorph) <- c("stem","gloss","morph_info", "segment_info")
   childes<- get_childes_data(childes_lang, corpus_args)
@@ -89,7 +92,7 @@ corpus$stem_m <- coalesce(corpus$stem, corpus$stem_m)
 corpus <- corpus |>
   select(id, utterance_id, corpus_name, gloss_m, n_cat, pos, stem_m, affix_m, affix_type_m, prefix, prefix_m, n_morpheme, morpheme_m, der_morpheme)
 
-o <- file.path(glue("/Users/loukatou/Documents/aoa-pipeline/data/childes/morph_{childes_lang}.rds"))
+o <- file.path(glue("data/childes/morph_{childes_lang}.rds"))
 
 saveRDS(corpus, o)
 return(corpus)
@@ -100,7 +103,7 @@ return(corpus)
 
 
 unimorph_extract <- function(childes_lang){
-  f <- file.path(glue("/Users/loukatou/Documents/aoa-pipeline/data/unimorph_{childes_lang}.csv"))
+  f <- file.path(glue("data/unimorph_{childes_lang}.csv"))
 unimorph <- read.csv(f, sep = "\t" ) #remove sep = "\t" for Norwegian data
 
 childes<- get_childes_data({childes_lang}, corpus_args)
@@ -147,7 +150,7 @@ corpus <- corpus |>
             prefix_m = prefix_m) |>
   distinct()
 
-o <- file.path(glue("/Users/loukatou/Documents/aoa-pipeline/data/childes/morph_{childes_lang}.rds"))
+o <- file.path(glue("/data/childes/morph_{childes_lang}.rds"))
 
 saveRDS(corpus, o)
 return(corpus)

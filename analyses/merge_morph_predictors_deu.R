@@ -6,20 +6,17 @@ library(gdata)
 
 ############################# US
 
-mor <- readRDS('/Users/loukatou/Documents/morphological_predictors/childes-mor-data/childes/Romance/mor.rds')
-mor <-  dplyr::filter(mor, grepl("Italian",transcript))
-mk <- readRDS('/Users/loukatou/Documents/morphological_predictors/childes-mor-data/childes/Romance/mk.rds')
-mk <-dplyr::filter(mk, grepl("Italian",transcript))
-w <- readRDS('/Users/loukatou/Documents/morphological_predictors/childes-mor-data/childes/Romance/w.rds')
-w <-dplyr::filter(w, grepl("Italian",transcript))
+mor <- readRDS('/Users/loukatou/Documents/morphological_predictors/childes-mor-data/childes/German/mor.rds')
+mk <- readRDS('/Users/loukatou/Documents/morphological_predictors/childes-mor-data/childes/German/mk.rds')
+w <- readRDS('/Users/loukatou/Documents/morphological_predictors/childes-mor-data/childes/German/w.rds')
 word <- w %>%
   dplyr::select(-pos) %>%
-  mutate(transcript = gsub("/Users/mikabr/childes/childes/Romance/Italian/", "", transcript)) %>% #Eng-NA
+  mutate(transcript = gsub("/Users/mikabr/childes/childes/German/", "", transcript)) %>% #Eng-NA
   mutate(corpus_name = gsub("/.*", "", transcript)) %>%
   mutate(incomplete_type=ifelse(is.na(incomplete_type), "0", incomplete_type))%>%
   filter(!incomplete_type =="omission")
 
-childes <- get_tokens(language = "ita", token="*") #role_exclude = "Target_Child"
+childes <- get_tokens(language = "deu", token="*") #role_exclude = "Target_Child"
 
 base <- mor %>%
   rename(mor_fk=id) %>%
@@ -27,7 +24,7 @@ base <- mor %>%
   left_join(mk) %>%
   dplyr::select(-file) %>%
   rename(mk_fk=id) %>%
-  mutate(transcript = gsub("/Users/mikabr/childes/childes/Romance/Italian/", "", transcript)) %>%
+  mutate(transcript = gsub("/Users/mikabr/childes/childes/German/", "", transcript)) %>%
   mutate(corpus_name = gsub("/.*", "", transcript))%>%
   rename(stem_right = stem) %>%
   rename(english_old = english) %>%
@@ -90,7 +87,7 @@ match_morph_to_childes <- function(name_corpus, name_collection){
   print(final)
 }
 
-final_tonelli<-match_morph_to_childes( "Tonelli", "Italian/")
+final_password<-match_morph_to_childes( "Wagner", "German/")
 tonelli_morphology <- summ_morph(final_tonelli)
 
 ########################################

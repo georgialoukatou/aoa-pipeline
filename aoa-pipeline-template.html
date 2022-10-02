@@ -367,6 +367,21 @@ pre code {
 <div id="load-wordbank-data" class="section level1">
 <h1>Load Wordbank data</h1>
 <p>Loading cached Wordbank data for English:</p>
+<pre><code>## # A tibble: 17,663 × 7
+##    language           measure  uni_lemma   age num_true total items           
+##    &lt;chr&gt;              &lt;chr&gt;    &lt;chr&gt;     &lt;int&gt;    &lt;int&gt; &lt;int&gt; &lt;list&gt;          
+##  1 English (American) produces a            16       32   946 &lt;tibble [2 × 5]&gt;
+##  2 English (American) produces a            17       10   237 &lt;tibble [2 × 5]&gt;
+##  3 English (American) produces a            18       33   371 &lt;tibble [2 × 5]&gt;
+##  4 English (American) produces a            19       28   267 &lt;tibble [2 × 5]&gt;
+##  5 English (American) produces a            20       24   206 &lt;tibble [2 × 5]&gt;
+##  6 English (American) produces a            21       26   134 &lt;tibble [2 × 5]&gt;
+##  7 English (American) produces a            22       41   140 &lt;tibble [2 × 5]&gt;
+##  8 English (American) produces a            23       54   176 &lt;tibble [2 × 5]&gt;
+##  9 English (American) produces a            24      109   350 &lt;tibble [2 × 5]&gt;
+## 10 English (American) produces a            25       76   224 &lt;tibble [2 × 5]&gt;
+## # … with 17,653 more rows</code></pre>
+<p>Defining languages:</p>
 <p>Loading Wordbank data for multiple languages (cached or not):</p>
 <p>Creating saved Wordbank data for a language, for example:</p>
 <p>Creating saved Wordbank data one step at a time (potentially making changes between steps), for example:</p>
@@ -380,9 +395,614 @@ pre code {
 <div id="childes" class="section level2">
 <h2>CHILDES</h2>
 <p>Loading cached CHILDES metrics for English:</p>
-<p>Loading cached CHILDES data for multiple languages:</p>
 <p>Creating saved CHILDES metrics for English, potentially changing which metrics are computed and/or arguments that are passed to <code>childesr</code> functions:</p>
 <p>Creating saved CHILDES data for many languages:</p>
+<p>Creating saved CHILDES data for many languages:</p>
+<pre><code>## [1] &quot;spa&quot;
+## [1] &quot;Getting CHILDES utterances&quot;
+## [1] &quot;Calculating token_metrics&quot;
+## [1] &quot;Computing count...&quot;
+## [1] &quot;Computing mean utterance length...&quot;
+## [1] &quot;Computing utterance position counts...&quot;
+## [1] &quot;Computing length in characters...&quot;
+## [1] &quot;Computing length in phonemes...&quot;
+## [1] &quot;Computing number of morphemes and categories&quot;
+## [1] &quot;Checking for morph file&quot;
+## [1] &quot;No morph file, looking for unimorph or morphnet data&quot;
+## # A tibble: 19,191 × 4
+## # Groups:   token [15,914]
+##    token       n_affix n_cat pos  
+##    &lt;chr&gt;         &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;
+##  1 abajo           2       4 V    
+##  2 abandonado      1.5     3 V    
+##  3 abandonado      1.5     3 ADJ  
+##  4 abandonados     2.5     3 V    
+##  5 abandonados     2.5     3 ADJ  
+##  6 abandonaron     2       5 V    
+##  7 abanicar        1       1 V    
+##  8 abanicarse      2       5 V    
+##  9 abanico         1.5     3 V    
+## 10 abanico         1.5     3 N    
+## # … with 19,181 more rows
+## [1] &quot;Computing number of types&quot;
+## # A tibble: 15,914 × 3
+##    token       n_type token_stem                                                
+##    &lt;chr&gt;        &lt;dbl&gt; &lt;chr&gt;                                                     
+##  1 abajo          1   &quot;abajar&quot;                                                  
+##  2 abandonado     2.5 &quot;c(\&quot;abandonar\&quot;, \&quot;abandonado\&quot;),c(\&quot;abandonar\&quot;, \&quot;aban…
+##  3 abandonados    2.5 &quot;c(\&quot;abandonar\&quot;, \&quot;abandonado\&quot;),c(\&quot;abandonar\&quot;, \&quot;aban…
+##  4 abandonaron    3   &quot;abandonar&quot;                                               
+##  5 abanicar       3   &quot;abanicar&quot;                                                
+##  6 abanicarse     3   &quot;abanicar&quot;                                                
+##  7 abanico        2   &quot;c(\&quot;abanicar\&quot;, \&quot;abanico\&quot;),c(\&quot;abanicar\&quot;, \&quot;abanico\&quot;…
+##  8 abatido        1   &quot;c(\&quot;abatir\&quot;, \&quot;abatido\&quot;),c(\&quot;abatir\&quot;, \&quot;abatido\&quot;)&quot;   
+##  9 abdominales    1   &quot;c(\&quot;abdominal\&quot;, \&quot;abdominales\&quot;),c(\&quot;abdominal\&quot;, \&quot;abd…
+## 10 abecedario     1   &quot;abecedario&quot;                                              
+## # … with 15,904 more rows
+## [1] &quot;Computing verb frames&quot;
+## [1] &quot;spa&quot;
+## [1] &quot;Calculating token_metrics&quot;
+## [1] &quot;Computing count...&quot;
+## [1] &quot;Computing mean utterance length...&quot;
+## [1] &quot;Computing utterance position counts...&quot;
+## [1] &quot;Computing length in characters...&quot;
+## [1] &quot;Computing length in phonemes...&quot;
+## [1] &quot;Computing number of morphemes and categories&quot;
+## [1] &quot;Checking for morph file&quot;
+## # A tibble: 19,191 × 4
+## # Groups:   token [15,914]
+##    token       n_affix n_cat pos  
+##    &lt;chr&gt;         &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;
+##  1 abajo           2       4 V    
+##  2 abandonado      1.5     3 V    
+##  3 abandonado      1.5     3 ADJ  
+##  4 abandonados     2.5     3 V    
+##  5 abandonados     2.5     3 ADJ  
+##  6 abandonaron     2       5 V    
+##  7 abanicar        1       1 V    
+##  8 abanicarse      2       5 V    
+##  9 abanico         1.5     3 V    
+## 10 abanico         1.5     3 N    
+## # … with 19,181 more rows
+## [1] &quot;Computing number of types&quot;
+## # A tibble: 15,914 × 3
+##    token       n_type token_stem                                                
+##    &lt;chr&gt;        &lt;dbl&gt; &lt;chr&gt;                                                     
+##  1 abajo          1   &quot;abajar&quot;                                                  
+##  2 abandonado     2.5 &quot;c(\&quot;abandonar\&quot;, \&quot;abandonado\&quot;),c(\&quot;abandonar\&quot;, \&quot;aban…
+##  3 abandonados    2.5 &quot;c(\&quot;abandonar\&quot;, \&quot;abandonado\&quot;),c(\&quot;abandonar\&quot;, \&quot;aban…
+##  4 abandonaron    3   &quot;abandonar&quot;                                               
+##  5 abanicar       3   &quot;abanicar&quot;                                                
+##  6 abanicarse     3   &quot;abanicar&quot;                                                
+##  7 abanico        2   &quot;c(\&quot;abanicar\&quot;, \&quot;abanico\&quot;),c(\&quot;abanicar\&quot;, \&quot;abanico\&quot;…
+##  8 abatido        1   &quot;c(\&quot;abatir\&quot;, \&quot;abatido\&quot;),c(\&quot;abatir\&quot;, \&quot;abatido\&quot;)&quot;   
+##  9 abdominales    1   &quot;c(\&quot;abdominal\&quot;, \&quot;abdominales\&quot;),c(\&quot;abdominal\&quot;, \&quot;abd…
+## 10 abecedario     1   &quot;abecedario&quot;                                              
+## # … with 15,904 more rows
+## [1] &quot;Computing verb frames&quot;
+## [1] &quot;deu&quot;
+## [1] &quot;Getting CHILDES tokens&quot;
+## [1] &quot;Calculating token_metrics&quot;
+## [1] &quot;Computing count...&quot;
+## [1] &quot;Computing mean utterance length...&quot;
+## [1] &quot;Computing utterance position counts...&quot;
+## [1] &quot;Computing length in characters...&quot;
+## [1] &quot;Computing length in phonemes...&quot;
+## [1] &quot;Computing number of morphemes and categories&quot;
+## [1] &quot;Checking for morph file&quot;
+## [1] &quot;No morph file, looking for unimorph or morphnet data&quot;
+## # A tibble: 18,212 × 4
+## # Groups:   token [18,071]
+##    token      n_affix n_cat pos  
+##    &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;
+##  1 a             1      3   N    
+##  2 A             1      3   N    
+##  3 ä             1      3   N    
+##  4 Aa            1      3   N    
+##  5 Aachener      1      3   N    
+##  6 Aal           1      3   N    
+##  7 Aale          2      3   N    
+##  8 Aalen         1.25   3   N    
+##  9 Aas           1.2    2.8 N    
+## 10 abarbeiten    1      1   V    
+## # … with 18,202 more rows
+## [1] &quot;Computing number of types&quot;
+## # A tibble: 18,071 × 3
+##    token      n_type token_stem             
+##    &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;                  
+##  1 a            2    &quot;a&quot;                    
+##  2 A            2    &quot;A&quot;                    
+##  3 ä            1    &quot;ä&quot;                    
+##  4 Aa           2    &quot;Aa&quot;                   
+##  5 Aachener     1    &quot;Aachener&quot;             
+##  6 Aal          3    &quot;Aal&quot;                  
+##  7 Aale         3    &quot;Aal&quot;                  
+##  8 Aalen        1.5  &quot;c(\&quot;Aal\&quot;, \&quot;Aalen\&quot;)&quot;
+##  9 Aas          1.33 &quot;c(\&quot;Aa\&quot;, \&quot;Aas\&quot;)&quot;   
+## 10 abarbeiten   2    &quot;abarbeiten&quot;           
+## # … with 18,061 more rows
+## [1] &quot;Computing verb frames&quot;
+## [1] &quot;eng&quot;
+## [1] &quot;Calculating token_metrics&quot;
+## [1] &quot;Computing count...&quot;
+## [1] &quot;Computing mean utterance length...&quot;
+## [1] &quot;Computing utterance position counts...&quot;
+## [1] &quot;Computing length in characters...&quot;
+## [1] &quot;Computing length in phonemes...&quot;
+## [1] &quot;Computing number of morphemes and categories&quot;
+## [1] &quot;Checking for morph file&quot;
+## [1] &quot;No morph file, looking for unimorph or morphnet data&quot;
+## # A tibble: 856 × 4
+## # Groups:   token [667]
+##    token         n_affix n_cat pos  
+##    &lt;chr&gt;           &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;
+##  1 a                   1   1   N    
+##  2 abbreviated         2   1.5 V    
+##  3 accommodating       2   2   V    
+##  4 accustomed          2   1.5 V    
+##  5 acquiesced          2   1.5 V    
+##  6 acquired            2   1.5 V    
+##  7 adults              2   2   N    
+##  8 adults              2   2   V    
+##  9 advanced            2   1.5 V    
+## 10 adventures          2   3   V    
+## # … with 846 more rows
+## [1] &quot;Computing number of types&quot;
+## # A tibble: 667 × 3
+##    token         n_type token_stem 
+##    &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;      
+##  1 a                  1 a/c        
+##  2 abbreviated        1 abbreviate 
+##  3 accommodating      1 accommodate
+##  4 accustomed         1 accustom   
+##  5 acquiesced         1 acquiesce  
+##  6 acquired           1 acquire    
+##  7 adults             1 adult,adult
+##  8 advanced           1 advance    
+##  9 adventures         1 adventure  
+## 10 affected           1 affect     
+## # … with 657 more rows
+## [1] &quot;Computing verb frames&quot;
+## [1] &quot;ita&quot;
+## [1] &quot;Calculating token_metrics&quot;
+## [1] &quot;Computing count...&quot;
+## [1] &quot;Computing mean utterance length...&quot;
+## [1] &quot;Computing utterance position counts...&quot;
+## [1] &quot;Computing length in characters...&quot;
+## [1] &quot;Computing length in phonemes...&quot;
+## [1] &quot;Computing number of morphemes and categories&quot;
+## [1] &quot;Checking for morph file&quot;
+## [1] &quot;No morph file, looking for unimorph or morphnet data&quot;
+## # A tibble: 8,605 × 4
+## # Groups:   token [6,402]
+##    token        n_affix n_cat pos  
+##    &lt;chr&gt;          &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;
+##  1 abbaia             2  3.5  V    
+##  2 abbaiano           2  4    V    
+##  3 abbaiare           1  1.5  V    
+##  4 abbaiare           1  1.5  N    
+##  5 abbaiava           2  5    V    
+##  6 abbandonare        1  1    V    
+##  7 abbandonata        2  2    ADJ  
+##  8 abbandoniamo       2  3.67 V    
+##  9 abbassare          1  1    V    
+## 10 abbassi            2  3.8  V    
+## # … with 8,595 more rows
+## [1] &quot;Computing number of types&quot;
+## # A tibble: 6,402 × 3
+##    token        n_type token_stem                                               
+##    &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;                                                    
+##  1 abbaia            4 &quot;abbaiare&quot;                                               
+##  2 abbaiano          4 &quot;abbaiare&quot;                                               
+##  3 abbaiare          4 &quot;abbaiare,abbaiare&quot;                                      
+##  4 abbaiava          4 &quot;abbaiare&quot;                                               
+##  5 abbandonare       2 &quot;abbandonare&quot;                                            
+##  6 abbandonata       1 &quot;abbandonato&quot;                                            
+##  7 abbandoniamo      2 &quot;abbandonare&quot;                                            
+##  8 abbassare         3 &quot;abbassare&quot;                                              
+##  9 abbassi           3 &quot;abbassare&quot;                                              
+## 10 abbasso           2 &quot;c(\&quot;abbassare\&quot;, \&quot;abbasso\&quot;),c(\&quot;abbassare\&quot;, \&quot;abbass…
+## # … with 6,392 more rows
+## [1] &quot;Computing verb frames&quot;
+## [1] &quot;nor&quot;
+## [1] &quot;Calculating token_metrics&quot;
+## [1] &quot;Computing count...&quot;
+## [1] &quot;Computing mean utterance length...&quot;
+## [1] &quot;Computing utterance position counts...&quot;
+## [1] &quot;Computing length in characters...&quot;
+## [1] &quot;Computing length in phonemes...&quot;
+## [1] &quot;Computing number of morphemes and categories&quot;
+## [1] &quot;Checking for morph file&quot;
+## [1] &quot;No morph file, looking for unimorph or morphnet data&quot;
+## # A tibble: 1,094 × 3
+## # Groups:   token [1,057]
+##    token      n_cat pos  
+##    &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt;
+##  1 agurken      2   N    
+##  2 anda         2   N    
+##  3 andre        1.5 ADJ  
+##  4 anna         1   ADJ  
+##  5 ansiktet     2   N    
+##  6 ansvar       2   N    
+##  7 antenner     2   N    
+##  8 appelsinen   2   N    
+##  9 år           2   N    
+## 10 arbeid       2   N    
+## # … with 1,084 more rows
+## [1] &quot;Computing number of types&quot;
+## # A tibble: 1,057 × 3
+##    token      n_type token_stem
+##    &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;     
+##  1 agurken         1 agurk     
+##  2 anda            3 and       
+##  3 andre           2 annan     
+##  4 anna            2 annan     
+##  5 ansiktet        1 ansikt    
+##  6 ansvar          1 ansvar    
+##  7 antenner        1 antenne   
+##  8 appelsinen      1 appelsin  
+##  9 år              1 år        
+## 10 arbeid          1 arbeid    
+## # … with 1,047 more rows
+## [1] &quot;Computing verb frames&quot;
+## [1] &quot;tur&quot;
+## [1] &quot;Calculating token_metrics&quot;
+## [1] &quot;Computing count...&quot;
+## [1] &quot;Computing mean utterance length...&quot;
+## [1] &quot;Computing utterance position counts...&quot;
+## [1] &quot;Computing length in characters...&quot;
+## [1] &quot;Computing length in phonemes...&quot;
+## [1] &quot;Computing number of morphemes and categories&quot;
+## [1] &quot;Checking for morph file&quot;
+## [1] &quot;No morph file, looking for unimorph or morphnet data&quot;
+## # A tibble: 2,252 × 3
+## # Groups:   token [2,210]
+##    token     n_cat pos  
+##    &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;
+##  1 abla       2.5  N    
+##  2 ablalar    2.67 N    
+##  3 ablan      3    N    
+##  4 ablanın    2.5  N    
+##  5 ablasının  3    N    
+##  6 ablaya     2    N    
+##  7 ablayı     2    N    
+##  8 ablayım    3    N    
+##  9 aç         5    V    
+## 10 açacak     6    V    
+## # … with 2,242 more rows
+## [1] &quot;Computing number of types&quot;
+## # A tibble: 2,210 × 3
+##    token     n_type token_stem
+##    &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt;     
+##  1 abla           8 abla      
+##  2 ablalar        8 abla      
+##  3 ablan          8 abla      
+##  4 ablanın        8 abla      
+##  5 ablasının      8 abla      
+##  6 ablaya         8 abla      
+##  7 ablayı         8 abla      
+##  8 ablayım        8 abla      
+##  9 aç            20 açmak     
+## 10 açacak        20 açmak     
+## # … with 2,200 more rows
+## [1] &quot;Computing verb frames&quot;
+## [1] &quot;swe&quot;
+## [1] &quot;Getting CHILDES utterances&quot;
+## [1] &quot;Calculating token_metrics&quot;
+## [1] &quot;Computing count...&quot;
+## [1] &quot;Computing mean utterance length...&quot;
+## [1] &quot;Computing utterance position counts...&quot;
+## [1] &quot;Computing length in characters...&quot;
+## [1] &quot;Computing length in phonemes...&quot;
+## [1] &quot;Computing number of morphemes and categories&quot;
+## [1] &quot;Checking for morph file&quot;
+## [1] &quot;No morph file, looking for unimorph or morphnet data&quot;
+## # A tibble: 2,816 × 4
+## # Groups:   token [2,561]
+##    token   n_affix n_cat pos  
+##    &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;
+##  1 absolut    1     4    ADJ  
+##  2 ack        1     3    N    
+##  3 affär      1     3    N    
+##  4 affären    2     3    N    
+##  5 ägg        1     3    N    
+##  6 ägget      2     3    N    
+##  7 åk         1.33  2.67 V    
+##  8 åk         1.33  2.67 N    
+##  9 åka        1     3    V    
+## 10 åkande     2     2    V    
+## # … with 2,806 more rows
+## [1] &quot;Computing number of types&quot;
+## # A tibble: 2,561 × 3
+##    token   n_type token_stem                             
+##    &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;                                  
+##  1 absolut      1 &quot;absolut&quot;                              
+##  2 ack          1 &quot;ack&quot;                                  
+##  3 affär        2 &quot;affär&quot;                                
+##  4 affären      2 &quot;affär&quot;                                
+##  5 ägg          2 &quot;ägg&quot;                                  
+##  6 ägget        2 &quot;ägg&quot;                                  
+##  7 åk           3 &quot;c(\&quot;åka\&quot;, \&quot;åk\&quot;),c(\&quot;åka\&quot;, \&quot;åk\&quot;)&quot;
+##  8 åka          7 &quot;åka&quot;                                  
+##  9 åkande       7 &quot;åka&quot;                                  
+## 10 åke          7 &quot;åka&quot;                                  
+## # … with 2,551 more rows
+## [1] &quot;Computing verb frames&quot;
+## [1] &quot;dan&quot;
+## [1] &quot;Calculating token_metrics&quot;
+## [1] &quot;Computing count...&quot;
+## [1] &quot;Computing mean utterance length...&quot;
+## [1] &quot;Computing utterance position counts...&quot;
+## [1] &quot;Computing length in characters...&quot;
+## [1] &quot;Computing length in phonemes...&quot;
+## [1] &quot;Computing number of morphemes and categories&quot;
+## [1] &quot;Checking for morph file&quot;
+## [1] &quot;No morph file, looking for unimorph or morphnet data&quot;
+## # A tibble: 1,254 × 3
+## # Groups:   token [1,237]
+##    token    n_cat pos  
+##    &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;
+##  1 abstrakt     3 ADJ  
+##  2 ælling       3 N    
+##  3 ællingen     3 N    
+##  4 ællinger     3 N    
+##  5 ænder        3 N    
+##  6 ænderne      3 N    
+##  7 ærligt       3 ADJ  
+##  8 ærter        3 N    
+##  9 afsked       3 N    
+## 10 aftale       3 N    
+## # … with 1,244 more rows
+## [1] &quot;Computing number of types&quot;
+## # A tibble: 1,237 × 3
+##    token    n_type token_stem
+##    &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;     
+##  1 abstrakt      1 abstrakt  
+##  2 ælling        3 ælling    
+##  3 ællingen      3 ælling    
+##  4 ællinger      3 ælling    
+##  5 ænder         4 and       
+##  6 ænderne       4 and       
+##  7 ærligt        1 ærlig     
+##  8 ærter         1 ært       
+##  9 afsked        1 afsked    
+## 10 aftale        2 aftale    
+## # … with 1,227 more rows
+## [1] &quot;Computing verb frames&quot;
+## [1] &quot;nld&quot;
+## [1] &quot;Calculating token_metrics&quot;
+## [1] &quot;Computing count...&quot;
+## [1] &quot;Computing mean utterance length...&quot;
+## [1] &quot;Computing utterance position counts...&quot;
+## [1] &quot;Computing length in characters...&quot;
+## [1] &quot;Computing length in phonemes...&quot;
+## [1] &quot;Computing number of morphemes and categories&quot;
+## [1] &quot;Checking for morph file&quot;
+## [1] &quot;No morph file, looking for unimorph or morphnet data&quot;
+## # A tibble: 3,499 × 3
+## # Groups:   token [3,396]
+##    token          n_cat pos  
+##    &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;
+##  1 aandachtig      3    ADJ  
+##  2 aangeboren      2    ADJ  
+##  3 aanschouwelijk  3    ADJ  
+##  4 aanstaande      1.5  ADJ  
+##  5 aantrekkelijk   3    ADJ  
+##  6 aanvaarden      2.33 V    
+##  7 aanwezig        3    ADJ  
+##  8 aanwezige       1.5  ADJ  
+##  9 aanzienlijk     3    ADJ  
+## 10 aardig          3    ADJ  
+## # … with 3,489 more rows
+## [1] &quot;Computing number of types&quot;
+## # A tibble: 3,396 × 3
+##    token          n_type token_stem    
+##    &lt;chr&gt;           &lt;dbl&gt; &lt;chr&gt;         
+##  1 aandachtig          1 aandachtig    
+##  2 aangeboren          1 aangeboren    
+##  3 aanschouwelijk      1 aanschouwelijk
+##  4 aanstaande          1 aanstaand     
+##  5 aantrekkelijk       1 aantrekkelijk 
+##  6 aanvaarden          1 aanvaarden    
+##  7 aanwezig            2 aanwezig      
+##  8 aanwezige           2 aanwezig      
+##  9 aanzienlijk         1 aanzienlijk   
+## 10 aardig              3 aardig        
+## # … with 3,386 more rows
+## [1] &quot;Computing verb frames&quot;
+## [1] &quot;fra&quot;
+## [1] &quot;Calculating token_metrics&quot;
+## [1] &quot;Computing count...&quot;
+## [1] &quot;Computing mean utterance length...&quot;
+## [1] &quot;Computing utterance position counts...&quot;
+## [1] &quot;Computing length in characters...&quot;
+## [1] &quot;Computing length in phonemes...&quot;
+## [1] &quot;Computing number of morphemes and categories&quot;
+## [1] &quot;Checking for morph file&quot;
+## [1] &quot;No morph file, looking for unimorph or morphnet data&quot;
+## # A tibble: 17,625 × 4
+## # Groups:   token [14,271]
+##    token      n_affix n_cat pos  
+##    &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;
+##  1 abaisse       1.91  3.82 V    
+##  2 abaisse       1.91  3.82 N    
+##  3 abaisses      2     3.6  V    
+##  4 abaisses      2     3.6  N    
+##  5 abandonne     2     4    V    
+##  6 abandonné     1.5   2.5  V    
+##  7 abandonné     1.5   2.5  N    
+##  8 abandonné     1.5   2.5  ADJ  
+##  9 abandonnée    2.5   3    V    
+## 10 abandonnée    2.5   3    ADJ  
+## # … with 17,615 more rows
+## [1] &quot;Computing number of types&quot;
+## # A tibble: 14,271 × 3
+##    token       n_type token_stem                                                
+##    &lt;chr&gt;        &lt;dbl&gt; &lt;chr&gt;                                                     
+##  1 abaisse        2   &quot;c(\&quot;abaisser\&quot;, \&quot;abaisse\&quot;),c(\&quot;abaisser\&quot;, \&quot;abaisse\&quot;…
+##  2 abaisses       2   &quot;c(\&quot;abaisser\&quot;, \&quot;abaisse\&quot;),c(\&quot;abaisser\&quot;, \&quot;abaisse\&quot;…
+##  3 abandonne      6   &quot;abandonner&quot;                                              
+##  4 abandonné      4.5 &quot;c(\&quot;abandonner\&quot;, \&quot;abandonné\&quot;),c(\&quot;abandonner\&quot;, \&quot;aba…
+##  5 abandonnée     4.5 &quot;c(\&quot;abandonner\&quot;, \&quot;abandonné\&quot;),c(\&quot;abandonner\&quot;, \&quot;aba…
+##  6 abandonnées    4.5 &quot;c(\&quot;abandonner\&quot;, \&quot;abandonné\&quot;),c(\&quot;abandonner\&quot;, \&quot;aba…
+##  7 abandonner     6   &quot;abandonner&quot;                                              
+##  8 abandonnes     6   &quot;abandonner&quot;                                              
+##  9 abdominaux     1   &quot;c(\&quot;abdominaux\&quot;, \&quot;abdominal\&quot;),c(\&quot;abdominaux\&quot;, \&quot;abd…
+## 10 abdos          1   &quot;c(\&quot;abdo\&quot;, \&quot;abdos\&quot;)&quot;                                  
+## # … with 14,261 more rows
+## [1] &quot;Computing verb frames&quot;
+## [1] &quot;fra&quot;
+## [1] &quot;Calculating token_metrics&quot;
+## [1] &quot;Computing count...&quot;
+## [1] &quot;Computing mean utterance length...&quot;
+## [1] &quot;Computing utterance position counts...&quot;
+## [1] &quot;Computing length in characters...&quot;
+## [1] &quot;Computing length in phonemes...&quot;
+## [1] &quot;Computing number of morphemes and categories&quot;
+## [1] &quot;Checking for morph file&quot;
+## # A tibble: 17,625 × 4
+## # Groups:   token [14,271]
+##    token      n_affix n_cat pos  
+##    &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;
+##  1 abaisse       1.91  3.82 V    
+##  2 abaisse       1.91  3.82 N    
+##  3 abaisses      2     3.6  V    
+##  4 abaisses      2     3.6  N    
+##  5 abandonne     2     4    V    
+##  6 abandonné     1.5   2.5  V    
+##  7 abandonné     1.5   2.5  N    
+##  8 abandonné     1.5   2.5  ADJ  
+##  9 abandonnée    2.5   3    V    
+## 10 abandonnée    2.5   3    ADJ  
+## # … with 17,615 more rows
+## [1] &quot;Computing number of types&quot;
+## # A tibble: 14,271 × 3
+##    token       n_type token_stem                                                
+##    &lt;chr&gt;        &lt;dbl&gt; &lt;chr&gt;                                                     
+##  1 abaisse        2   &quot;c(\&quot;abaisser\&quot;, \&quot;abaisse\&quot;),c(\&quot;abaisser\&quot;, \&quot;abaisse\&quot;…
+##  2 abaisses       2   &quot;c(\&quot;abaisser\&quot;, \&quot;abaisse\&quot;),c(\&quot;abaisser\&quot;, \&quot;abaisse\&quot;…
+##  3 abandonne      6   &quot;abandonner&quot;                                              
+##  4 abandonné      4.5 &quot;c(\&quot;abandonner\&quot;, \&quot;abandonné\&quot;),c(\&quot;abandonner\&quot;, \&quot;aba…
+##  5 abandonnée     4.5 &quot;c(\&quot;abandonner\&quot;, \&quot;abandonné\&quot;),c(\&quot;abandonner\&quot;, \&quot;aba…
+##  6 abandonnées    4.5 &quot;c(\&quot;abandonner\&quot;, \&quot;abandonné\&quot;),c(\&quot;abandonner\&quot;, \&quot;aba…
+##  7 abandonner     6   &quot;abandonner&quot;                                              
+##  8 abandonnes     6   &quot;abandonner&quot;                                              
+##  9 abdominaux     1   &quot;c(\&quot;abdominaux\&quot;, \&quot;abdominal\&quot;),c(\&quot;abdominaux\&quot;, \&quot;abd…
+## 10 abdos          1   &quot;c(\&quot;abdo\&quot;, \&quot;abdos\&quot;)&quot;                                  
+## # … with 14,261 more rows
+## [1] &quot;Computing verb frames&quot;
+## [1] &quot;por&quot;
+## [1] &quot;Calculating token_metrics&quot;
+## [1] &quot;Computing count...&quot;
+## [1] &quot;Computing mean utterance length...&quot;
+## [1] &quot;Computing utterance position counts...&quot;
+## [1] &quot;Computing length in characters...&quot;
+## [1] &quot;Computing length in phonemes...&quot;
+## [1] &quot;Computing number of morphemes and categories&quot;
+## [1] &quot;Checking for morph file&quot;
+## [1] &quot;No morph file, looking for unimorph or morphnet data&quot;
+## # A tibble: 7,925 × 4
+## # Groups:   token [6,722]
+##    token      n_affix n_cat pos  
+##    &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;
+##  1 aba           1.67  3.33 V    
+##  2 aba           1.67  3.33 N    
+##  3 abaixo        2     4    V    
+##  4 abana         2     4    V    
+##  5 abanar        1     3    V    
+##  6 abandona      2     4    V    
+##  7 abandonado    1.5   3    V    
+##  8 abandonado    1.5   3    ADJ  
+##  9 abandonar     1     3    V    
+## 10 abandonava    2     5    V    
+## # … with 7,915 more rows
+## [1] &quot;Computing number of types&quot;
+## # A tibble: 6,722 × 3
+##    token      n_type token_stem                                                 
+##    &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;                                                      
+##  1 aba          1.67 &quot;c(\&quot;abar\&quot;, \&quot;aba\&quot;),c(\&quot;abar\&quot;, \&quot;aba\&quot;)&quot;                
+##  2 abaixo       1    &quot;abaixar&quot;                                                  
+##  3 abana        3    &quot;abanar&quot;                                                   
+##  4 abanar       3    &quot;abanar&quot;                                                   
+##  5 abandona     4    &quot;abandonar&quot;                                                
+##  6 abandonado   2.5  &quot;c(\&quot;abandonar\&quot;, \&quot;abandonado\&quot;),c(\&quot;abandonar\&quot;, \&quot;aband…
+##  7 abandonar    4    &quot;abandonar&quot;                                                
+##  8 abandonava   4    &quot;abandonar&quot;                                                
+##  9 abanou       3    &quot;abanar&quot;                                                   
+## 10 abe          2    &quot;abar&quot;                                                     
+## # … with 6,712 more rows
+## [1] &quot;Computing verb frames&quot;
+## [1] &quot;hun&quot;
+## [1] &quot;Calculating token_metrics&quot;
+## [1] &quot;Computing count...&quot;
+## [1] &quot;Computing mean utterance length...&quot;
+## [1] &quot;Computing utterance position counts...&quot;
+## [1] &quot;Computing length in characters...&quot;
+## [1] &quot;Computing length in phonemes...&quot;
+## [1] &quot;Computing number of morphemes and categories&quot;
+## [1] &quot;Checking for morph file&quot;
+## [1] &quot;No morph file, looking for unimorph or morphnet data&quot;
+## # A tibble: 8,304 × 4
+## # Groups:   token [7,748]
+##    token      n_affix n_cat pos  
+##    &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;
+##  1 abbahagyja       2     5 V    
+##  2 abbahagyni       2     1 V    
+##  3 abbahagyta       2     5 V    
+##  4 ablak            1     2 N    
+##  5 ablaka           2     3 N    
+##  6 ablakban         2     2 N    
+##  7 ablakhoz         2     2 N    
+##  8 ablaknak         2     2 N    
+##  9 ablakok          2     2 N    
+## 10 ablakokat        3     2 N    
+## # … with 8,294 more rows
+## [1] &quot;Computing number of types&quot;
+## # A tibble: 7,748 × 3
+##    token      n_type token_stem
+##    &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;     
+##  1 abbahagyja      3 abbahagy  
+##  2 abbahagyni      3 abbahagy  
+##  3 abbahagyta      3 abbahagy  
+##  4 ablak          11 ablak     
+##  5 ablaka         11 ablak     
+##  6 ablakban       11 ablak     
+##  7 ablakhoz       11 ablak     
+##  8 ablaknak       11 ablak     
+##  9 ablakok        11 ablak     
+## 10 ablakokat      11 ablak     
+## # … with 7,738 more rows
+## [1] &quot;Computing verb frames&quot;</code></pre>
+<p>Creating saved UNILEMMA data for many languages:</p>
+<pre><code>## [1] &quot;spanish_(mexican)&quot;
+## [1] &quot;Within the get_uni_lemma_metrics function&quot;
+## [1] &quot;spanish_(european)&quot;
+## [1] &quot;Within the get_uni_lemma_metrics function&quot;
+## [1] &quot;german&quot;
+## [1] &quot;Within the get_uni_lemma_metrics function&quot;
+## [1] &quot;english_(american)&quot;
+## [1] &quot;Within the get_uni_lemma_metrics function&quot;
+## [1] &quot;italian&quot;
+## [1] &quot;Within the get_uni_lemma_metrics function&quot;
+## [1] &quot;norwegian&quot;
+## [1] &quot;Within the get_uni_lemma_metrics function&quot;
+## [1] &quot;turkish&quot;
+## [1] &quot;Within the get_uni_lemma_metrics function&quot;
+## [1] &quot;swedish&quot;
+## [1] &quot;Within the get_uni_lemma_metrics function&quot;
+## [1] &quot;danish&quot;
+## [1] &quot;Within the get_uni_lemma_metrics function&quot;
+## [1] &quot;dutch&quot;
+## [1] &quot;Within the get_uni_lemma_metrics function&quot;
+## [1] &quot;french_(french)&quot;
+## [1] &quot;Within the get_uni_lemma_metrics function&quot;
+## [1] &quot;french_(quebecois)&quot;
+## [1] &quot;Within the get_uni_lemma_metrics function&quot;
+## [1] &quot;portuguese_(european)&quot;
+## [1] &quot;Within the get_uni_lemma_metrics function&quot;
+## [1] &quot;hungarian&quot;
+## [1] &quot;Within the get_uni_lemma_metrics function&quot;</code></pre>
+<p>Loading cached CHILDES data for multiple languages:</p>
 <p>Get phonology via eSpeak for tokens that didn’t get it from CHILDES:</p>
 </div>
 </div>
@@ -401,66 +1021,904 @@ pre code {
 </div>
 <div id="preparing-data-for-regression" class="section level2">
 <h2>Preparing data for regression</h2>
-<pre><code>## Imputing English (American) with 20 steps...
+<pre><code>## [1] &quot;language&quot;
+## [1] &quot;Danish&quot;
+## [1] &quot;data&quot;
+## # A tibble: 322 × 12
+##    uni_lemma   lexical_category category  freq concreteness babiness length_char
+##    &lt;chr&gt;       &lt;fct&gt;            &lt;chr&gt;    &lt;dbl&gt;        &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt;
+##  1 airplane    nouns            vehicles    NA         4.96    NA             NA
+##  2 all         function_words   quantif…    NA         2.27     2.19          NA
+##  3 all gone    predicates       descrip…    NA         2.04    NA             NA
+##  4 animal      nouns            animals     NA         4.61     4.89          NA
+##  5 another     function_words   quantif…    NA         2.69     2.13          NA
+##  6 apple       nouns            food_dr…    NA         5        3.5           NA
+##  7 arm         nouns            body_pa…    NA         4.96     4.3           NA
+##  8 away        function_words   locatio…    NA         2.23     1.92          NA
+##  9 back (loca… function_words   locatio…    NA         4.33     3.5           NA
+## 10 bad         predicates       descrip…    NA         1.68     3.42          NA
+## # … with 312 more rows, and 5 more variables: n_type &lt;dbl&gt;, n_cat &lt;dbl&gt;,
+## #   n_affix &lt;dbl&gt;, per_frame &lt;dbl&gt;, mlu &lt;dbl&gt;
+## [1] &quot;pred_sources1&quot;
+## [[1]]
+## [1] &quot;freq&quot;
+## 
+## [[2]]
+## [1] &quot;concreteness&quot; &quot;babiness&quot;    
+## 
+## [[3]]
+## [1] &quot;length_char&quot;
+## 
+## [[4]]
+## [1] &quot;n_type&quot;  &quot;n_cat&quot;   &quot;n_affix&quot;
+## 
+## [[5]]
+## [1] &quot;per_frame&quot;
+## 
+## [[6]]
+## [1] &quot;mlu&quot;
+## 
+## [1] &quot;pred_sources2&quot;
+## [[1]]
+## [1] &quot;freq&quot;
+## 
+## [[2]]
+## [1] &quot;concreteness&quot; &quot;babiness&quot;    
+## 
+## [[3]]
+## [1] &quot;length_char&quot;
+## 
+## [[4]]
+## [1] &quot;n_type&quot; &quot;n_cat&quot; 
+## 
+## [[5]]
+## [1] &quot;per_frame&quot;
+## 
+## [[6]]
+## [1] &quot;mlu&quot;
+## 
+## Imputing Danish with 20 steps...
+## get predictor order.
+## get missing data
+## get imputation seed
+## pred_sources
+## freq
+## c(&quot;concreteness&quot;, &quot;babiness&quot;)
+## length_char
+## c(&quot;n_type&quot;, &quot;n_cat&quot;)
+## per_frame
+## mlu
+## do iterate imputation
+## do scaling
+## [1] &quot;language&quot;
+## [1] &quot;English (American)&quot;
+## [1] &quot;data&quot;
+## # A tibble: 590 × 12
+##    uni_lemma lexical_category category    freq concreteness babiness length_char
+##    &lt;chr&gt;     &lt;fct&gt;            &lt;chr&gt;      &lt;dbl&gt;        &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt;
+##  1 a         function_words   quantifie… NA            1.46     3.45       NA   
+##  2 a lot     function_words   quantifie… -4.50         2.37    NA           3.35
+##  3 about     function_words   locations  NA            1.77     2.4        NA   
+##  4 above     function_words   locations  NA            3.33     2.42       NA   
+##  5 airplane  nouns            vehicles   -5.76         4.96    NA           6.99
+##  6 all       function_words   quantifie… NA            2.27     2.19       NA   
+##  7 all gone  predicates       descripti… NA            2.04    NA          NA   
+##  8 alligator nouns            animals    NA            4.96     1.31       NA   
+##  9 am        function_words   helping_v… NA            1.96     1.83       NA   
+## 10 and       function_words   connectin… NA            1.52     1.67       NA   
+## # … with 580 more rows, and 5 more variables: n_type &lt;dbl&gt;, n_cat &lt;dbl&gt;,
+## #   n_affix &lt;dbl&gt;, per_frame &lt;dbl&gt;, mlu &lt;dbl&gt;
+## [1] &quot;pred_sources1&quot;
+## [[1]]
+## [1] &quot;freq&quot;
+## 
+## [[2]]
+## [1] &quot;concreteness&quot; &quot;babiness&quot;    
+## 
+## [[3]]
+## [1] &quot;length_char&quot;
+## 
+## [[4]]
+## [1] &quot;n_type&quot;  &quot;n_cat&quot;   &quot;n_affix&quot;
+## 
+## [[5]]
+## [1] &quot;per_frame&quot;
+## 
+## [[6]]
+## [1] &quot;mlu&quot;
+## 
+## [1] &quot;pred_sources2&quot;
+## [[1]]
+## [1] &quot;freq&quot;
+## 
+## [[2]]
+## [1] &quot;concreteness&quot; &quot;babiness&quot;    
+## 
+## [[3]]
+## [1] &quot;length_char&quot;
+## 
+## [[4]]
+## [1] &quot;n_type&quot; &quot;n_cat&quot; 
+## 
+## [[5]]
+## [1] &quot;per_frame&quot;
+## 
+## [[6]]
+## [1] &quot;mlu&quot;
+## 
+## Imputing English (American) with 20 steps...
+## get predictor order.
+## get missing data
+## get imputation seed
+## pred_sources
+## freq
+## c(&quot;concreteness&quot;, &quot;babiness&quot;)
+## length_char
+## c(&quot;n_type&quot;, &quot;n_cat&quot;)
+## per_frame
+## mlu
+## do iterate imputation
+## do scaling
+## [1] &quot;language&quot;
+## [1] &quot;French (French)&quot;
+## [1] &quot;data&quot;
+## # A tibble: 436 × 12
+##    uni_lemma lexical_category category    freq concreteness babiness length_char
+##    &lt;chr&gt;     &lt;fct&gt;            &lt;chr&gt;      &lt;dbl&gt;        &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt;
+##  1 a         function_words   quantifi…  NA            1.46     3.45       NA   
+##  2 a lot     function_words   quantifi… -11.1          2.37    NA           3   
+##  3 above     function_words   preposit…  NA            3.33     2.42       NA   
+##  4 again     function_words   quantifi…  NA            2       NA          NA   
+##  5 airplane  nouns            vehicles   -9.96         4.96    NA           5   
+##  6 all       function_words   quantifi…  NA            2.27     2.19       NA   
+##  7 all gone  predicates       descript…  NA            2.04    NA          NA   
+##  8 also      function_words   quantifi…  NA            1.83    NA          NA   
+##  9 and       function_words   connecti…  NA            1.52     1.67       NA   
+## 10 animal    nouns            animals    -5.17         4.61     4.89        6.70
+## # … with 426 more rows, and 5 more variables: n_type &lt;dbl&gt;, n_cat &lt;dbl&gt;,
+## #   n_affix &lt;dbl&gt;, per_frame &lt;dbl&gt;, mlu &lt;dbl&gt;
+## [1] &quot;pred_sources1&quot;
+## [[1]]
+## [1] &quot;freq&quot;
+## 
+## [[2]]
+## [1] &quot;concreteness&quot; &quot;babiness&quot;    
+## 
+## [[3]]
+## [1] &quot;length_char&quot;
+## 
+## [[4]]
+## [1] &quot;n_type&quot;  &quot;n_cat&quot;   &quot;n_affix&quot;
+## 
+## [[5]]
+## [1] &quot;per_frame&quot;
+## 
+## [[6]]
+## [1] &quot;mlu&quot;
+## 
+## [1] &quot;pred_sources2&quot;
+## [[1]]
+## [1] &quot;freq&quot;
+## 
+## [[2]]
+## [1] &quot;concreteness&quot; &quot;babiness&quot;    
+## 
+## [[3]]
+## [1] &quot;length_char&quot;
+## 
+## [[4]]
+## [1] &quot;n_type&quot;  &quot;n_cat&quot;   &quot;n_affix&quot;
+## 
+## [[5]]
+## [1] &quot;per_frame&quot;
+## 
+## [[6]]
+## [1] &quot;mlu&quot;
+## 
 ## Imputing French (French) with 20 steps...
+## get predictor order.
+## get missing data
+## get imputation seed
+## pred_sources
+## freq
+## c(&quot;concreteness&quot;, &quot;babiness&quot;)
+## length_char
+## c(&quot;n_type&quot;, &quot;n_cat&quot;, &quot;n_affix&quot;)
+## per_frame
+## mlu
+## do iterate imputation
+## do scaling
+## [1] &quot;language&quot;
+## [1] &quot;French (Quebecois)&quot;
+## [1] &quot;data&quot;
+## # A tibble: 525 × 12
+##    uni_lemma lexical_category category    freq concreteness babiness length_char
+##    &lt;chr&gt;     &lt;fct&gt;            &lt;chr&gt;      &lt;dbl&gt;        &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt;
+##  1 a         function_words   quantifi…  NA            1.46     3.45          NA
+##  2 a lot     function_words   quantifi… -11.1          2.37    NA              3
+##  3 able      predicates       descript…  NA            2.38    NA             NA
+##  4 again     function_words   quantifi…  NA            2       NA             NA
+##  5 airplane  nouns            vehicles   -9.96         4.96    NA              5
+##  6 all       function_words   quantifi…  NA            2.27     2.19          NA
+##  7 all gone  predicates       descript…  NA            2.04    NA             NA
+##  8 also      function_words   connecti…  NA            1.83    NA             NA
+##  9 and       function_words   connecti…  NA            1.52     1.67          NA
+## 10 angry     predicates       descript…  NA            2.53    NA             NA
+## # … with 515 more rows, and 5 more variables: n_type &lt;dbl&gt;, n_cat &lt;dbl&gt;,
+## #   n_affix &lt;dbl&gt;, per_frame &lt;dbl&gt;, mlu &lt;dbl&gt;
+## [1] &quot;pred_sources1&quot;
+## [[1]]
+## [1] &quot;freq&quot;
+## 
+## [[2]]
+## [1] &quot;concreteness&quot; &quot;babiness&quot;    
+## 
+## [[3]]
+## [1] &quot;length_char&quot;
+## 
+## [[4]]
+## [1] &quot;n_type&quot;  &quot;n_cat&quot;   &quot;n_affix&quot;
+## 
+## [[5]]
+## [1] &quot;per_frame&quot;
+## 
+## [[6]]
+## [1] &quot;mlu&quot;
+## 
+## [1] &quot;pred_sources2&quot;
+## [[1]]
+## [1] &quot;freq&quot;
+## 
+## [[2]]
+## [1] &quot;concreteness&quot; &quot;babiness&quot;    
+## 
+## [[3]]
+## [1] &quot;length_char&quot;
+## 
+## [[4]]
+## [1] &quot;n_type&quot;  &quot;n_cat&quot;   &quot;n_affix&quot;
+## 
+## [[5]]
+## [1] &quot;per_frame&quot;
+## 
+## [[6]]
+## [1] &quot;mlu&quot;
+## 
+## Imputing French (Quebecois) with 20 steps...
+## get predictor order.
+## get missing data
+## get imputation seed
+## pred_sources
+## freq
+## c(&quot;concreteness&quot;, &quot;babiness&quot;)
+## length_char
+## c(&quot;n_type&quot;, &quot;n_cat&quot;, &quot;n_affix&quot;)
+## per_frame
+## mlu
+## do iterate imputation
+## do scaling
+## [1] &quot;language&quot;
+## [1] &quot;German&quot;
+## [1] &quot;data&quot;
+## # A tibble: 376 × 12
+##    uni_lemma lexical_category category    freq concreteness babiness length_char
+##    &lt;chr&gt;     &lt;fct&gt;            &lt;chr&gt;      &lt;dbl&gt;        &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt;
+##  1 a         function_words   quantifie… NA            1.46     3.45          NA
+##  2 a little  function_words   quantifie… NA           NA       NA             NA
+##  3 above     function_words   locations  NA            3.33     2.42          NA
+##  4 airplane  nouns            vehicles   -8.71         4.96    NA              5
+##  5 also      function_words   quantifie… NA            1.83    NA             NA
+##  6 animal    nouns            animals    NA            4.61     4.89          NA
+##  7 another   function_words   quantifie… NA            2.69     2.13          NA
+##  8 ant       nouns            animals    NA            4.86     1.6           NA
+##  9 apple     nouns            food_drink NA            5        3.5           NA
+## 10 arm       nouns            body_parts NA            4.96     4.3           NA
+## # … with 366 more rows, and 5 more variables: n_type &lt;dbl&gt;, n_cat &lt;dbl&gt;,
+## #   n_affix &lt;dbl&gt;, per_frame &lt;dbl&gt;, mlu &lt;dbl&gt;
+## [1] &quot;pred_sources1&quot;
+## [[1]]
+## [1] &quot;freq&quot;
+## 
+## [[2]]
+## [1] &quot;concreteness&quot; &quot;babiness&quot;    
+## 
+## [[3]]
+## [1] &quot;length_char&quot;
+## 
+## [[4]]
+## [1] &quot;n_type&quot;  &quot;n_cat&quot;   &quot;n_affix&quot;
+## 
+## [[5]]
+## [1] &quot;per_frame&quot;
+## 
+## [[6]]
+## [1] &quot;mlu&quot;
+## 
+## [1] &quot;pred_sources2&quot;
+## [[1]]
+## [1] &quot;freq&quot;
+## 
+## [[2]]
+## [1] &quot;concreteness&quot; &quot;babiness&quot;    
+## 
+## [[3]]
+## [1] &quot;length_char&quot;
+## 
+## [[4]]
+## [1] &quot;n_type&quot;  &quot;n_cat&quot;   &quot;n_affix&quot;
+## 
+## [[5]]
+## [1] &quot;per_frame&quot;
+## 
+## [[6]]
+## [1] &quot;mlu&quot;
+## 
+## Imputing German with 20 steps...
+## get predictor order.
+## get missing data
+## get imputation seed
+## pred_sources
+## freq
+## c(&quot;concreteness&quot;, &quot;babiness&quot;)
+## length_char
+## c(&quot;n_type&quot;, &quot;n_cat&quot;, &quot;n_affix&quot;)
+## per_frame
+## mlu
+## do iterate imputation
+## do scaling
+## [1] &quot;language&quot;
+## [1] &quot;Italian&quot;
+## [1] &quot;data&quot;
+## # A tibble: 336 × 12
+##    uni_lemma lexical_category category    freq concreteness babiness length_char
+##    &lt;chr&gt;     &lt;fct&gt;            &lt;chr&gt;      &lt;dbl&gt;        &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt;
+##  1 a         function_words   quantifie… NA            1.46     3.45       NA   
+##  2 above     function_words   locations  NA            3.33     2.42       NA   
+##  3 airplane  nouns            vehicles   -5.94         4.96    NA           5.10
+##  4 angry     predicates       descripti… -5.69         2.53    NA           9.70
+##  5 animal    nouns            animals    -4.29         4.61     4.89        7.97
+##  6 another   function_words   quantifie… NA            2.69     2.13       NA   
+##  7 ant       nouns            animals    NA            4.86     1.6        NA   
+##  8 apple     nouns            food_drink NA            5        3.5        NA   
+##  9 arm       nouns            body_parts NA            4.96     4.3        NA   
+## 10 at        function_words   locations  NA            2.07     2          NA   
+## # … with 326 more rows, and 5 more variables: n_type &lt;dbl&gt;, n_cat &lt;dbl&gt;,
+## #   n_affix &lt;dbl&gt;, per_frame &lt;dbl&gt;, mlu &lt;dbl&gt;
+## [1] &quot;pred_sources1&quot;
+## [[1]]
+## [1] &quot;freq&quot;
+## 
+## [[2]]
+## [1] &quot;concreteness&quot; &quot;babiness&quot;    
+## 
+## [[3]]
+## [1] &quot;length_char&quot;
+## 
+## [[4]]
+## [1] &quot;n_type&quot;  &quot;n_cat&quot;   &quot;n_affix&quot;
+## 
+## [[5]]
+## [1] &quot;per_frame&quot;
+## 
+## [[6]]
+## [1] &quot;mlu&quot;
+## 
+## [1] &quot;pred_sources2&quot;
+## [[1]]
+## [1] &quot;freq&quot;
+## 
+## [[2]]
+## [1] &quot;concreteness&quot; &quot;babiness&quot;    
+## 
+## [[3]]
+## [1] &quot;length_char&quot;
+## 
+## [[4]]
+## [1] &quot;n_type&quot; &quot;n_cat&quot; 
+## 
+## [[5]]
+## [1] &quot;per_frame&quot;
+## 
+## [[6]]
+## [1] &quot;mlu&quot;
+## 
 ## Imputing Italian with 20 steps...
-## Imputing Spanish (Mexican) with 20 steps...</code></pre>
+## get predictor order.
+## get missing data
+## get imputation seed
+## pred_sources
+## freq
+## c(&quot;concreteness&quot;, &quot;babiness&quot;)
+## length_char
+## c(&quot;n_type&quot;, &quot;n_cat&quot;)
+## per_frame
+## mlu
+## do iterate imputation
+## do scaling
+## [1] &quot;language&quot;
+## [1] &quot;Norwegian&quot;
+## [1] &quot;data&quot;
+## # A tibble: 318 × 12
+##    uni_lemma   lexical_category category  freq concreteness babiness length_char
+##    &lt;chr&gt;       &lt;fct&gt;            &lt;chr&gt;    &lt;dbl&gt;        &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt;
+##  1 airplane    nouns            vehicles    NA         4.96    NA             NA
+##  2 all         function_words   quantif…    NA         2.27     2.19          NA
+##  3 all gone    predicates       descrip…    NA         2.04    NA             NA
+##  4 animal      nouns            animals     NA         4.61     4.89          NA
+##  5 another     function_words   quantif…    NA         2.69     2.13          NA
+##  6 any         function_words   quantif…    NA         1.72     2.5           NA
+##  7 apple       nouns            food_dr…    NA         5        3.5           NA
+##  8 arm         nouns            body_pa…    NA         4.96     4.3           NA
+##  9 away        function_words   locatio…    NA         2.23     1.92          NA
+## 10 back (loca… function_words   locatio…    NA         4.33     3.5           NA
+## # … with 308 more rows, and 5 more variables: n_type &lt;dbl&gt;, n_cat &lt;dbl&gt;,
+## #   n_affix &lt;dbl&gt;, per_frame &lt;dbl&gt;, mlu &lt;dbl&gt;
+## [1] &quot;pred_sources1&quot;
+## [[1]]
+## [1] &quot;freq&quot;
+## 
+## [[2]]
+## [1] &quot;concreteness&quot; &quot;babiness&quot;    
+## 
+## [[3]]
+## [1] &quot;length_char&quot;
+## 
+## [[4]]
+## [1] &quot;n_type&quot;  &quot;n_cat&quot;   &quot;n_affix&quot;
+## 
+## [[5]]
+## [1] &quot;per_frame&quot;
+## 
+## [[6]]
+## [1] &quot;mlu&quot;
+## 
+## [1] &quot;pred_sources2&quot;
+## [[1]]
+## [1] &quot;freq&quot;
+## 
+## [[2]]
+## [1] &quot;concreteness&quot; &quot;babiness&quot;    
+## 
+## [[3]]
+## [1] &quot;length_char&quot;
+## 
+## [[4]]
+## character(0)
+## 
+## [[5]]
+## [1] &quot;per_frame&quot;
+## 
+## [[6]]
+## [1] &quot;mlu&quot;
+## 
+## Imputing Norwegian with 20 steps...
+## get predictor order.
+## get missing data
+## get imputation seed
+## pred_sources
+## freq
+## c(&quot;concreteness&quot;, &quot;babiness&quot;)
+## length_char
+## character(0)
+## per_frame
+## mlu
+## do iterate imputation
+## do scaling
+## [1] &quot;language&quot;
+## [1] &quot;Portuguese (European)&quot;
+## [1] &quot;data&quot;
+## # A tibble: 224 × 12
+##    uni_lemma lexical_category category    freq concreteness babiness length_char
+##    &lt;chr&gt;     &lt;fct&gt;            &lt;chr&gt;      &lt;dbl&gt;        &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt;
+##  1 a lot     function_words   quantifie… -9.65         2.37    NA           4   
+##  2 above     function_words   locations  NA            3.33     2.42       NA   
+##  3 airplane  nouns            vehicles   NA            4.96    NA          NA   
+##  4 all       function_words   quantifie… NA            2.27     2.19       NA   
+##  5 animal    nouns            animals    -6.98         4.61     4.89        6.07
+##  6 apple     nouns            food_drink NA            5        3.5        NA   
+##  7 arm       nouns            body_parts NA            4.96     4.3        NA   
+##  8 bad       predicates       descripti… NA            1.68     3.42       NA   
+##  9 ball      nouns            toys       NA            5        6          NA   
+## 10 banana    nouns            food_drink NA            5        3.08       NA   
+## # … with 214 more rows, and 5 more variables: n_type &lt;dbl&gt;, n_cat &lt;dbl&gt;,
+## #   n_affix &lt;dbl&gt;, per_frame &lt;dbl&gt;, mlu &lt;dbl&gt;
+## [1] &quot;pred_sources1&quot;
+## [[1]]
+## [1] &quot;freq&quot;
+## 
+## [[2]]
+## [1] &quot;concreteness&quot; &quot;babiness&quot;    
+## 
+## [[3]]
+## [1] &quot;length_char&quot;
+## 
+## [[4]]
+## [1] &quot;n_type&quot;  &quot;n_cat&quot;   &quot;n_affix&quot;
+## 
+## [[5]]
+## [1] &quot;per_frame&quot;
+## 
+## [[6]]
+## [1] &quot;mlu&quot;
+## 
+## [1] &quot;pred_sources2&quot;
+## [[1]]
+## [1] &quot;freq&quot;
+## 
+## [[2]]
+## [1] &quot;concreteness&quot; &quot;babiness&quot;    
+## 
+## [[3]]
+## [1] &quot;length_char&quot;
+## 
+## [[4]]
+## [1] &quot;n_type&quot;  &quot;n_cat&quot;   &quot;n_affix&quot;
+## 
+## [[5]]
+## [1] &quot;per_frame&quot;
+## 
+## [[6]]
+## [1] &quot;mlu&quot;
+## 
+## Imputing Portuguese (European) with 20 steps...
+## get predictor order.
+## get missing data
+## get imputation seed
+## pred_sources
+## freq
+## c(&quot;concreteness&quot;, &quot;babiness&quot;)
+## length_char
+## c(&quot;n_type&quot;, &quot;n_cat&quot;, &quot;n_affix&quot;)
+## per_frame
+## mlu
+## do iterate imputation
+## do scaling
+## [1] &quot;language&quot;
+## [1] &quot;Spanish (European)&quot;
+## [1] &quot;data&quot;
+## # A tibble: 458 × 12
+##    uni_lemma lexical_category category    freq concreteness babiness length_char
+##    &lt;chr&gt;     &lt;fct&gt;            &lt;chr&gt;      &lt;dbl&gt;        &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt;
+##  1 a         function_words   quantifie…    NA         1.46     3.45          NA
+##  2 a         function_words   articles      NA         1.46     3.45          NA
+##  3 above     function_words   locations     NA         3.33     2.42          NA
+##  4 afraid    predicates       descripti…    NA         2.7     NA             NA
+##  5 again     function_words   articles      NA         2       NA             NA
+##  6 airplane  nouns            vehicles      NA         4.96    NA             NA
+##  7 all       function_words   quantifie…    NA         2.27     2.19          NA
+##  8 all       function_words   articles      NA         2.27     2.19          NA
+##  9 almost    function_words   locations     NA         1.66    NA             NA
+## 10 alone     predicates       descripti…    NA         2.86    NA             NA
+## # … with 448 more rows, and 5 more variables: n_type &lt;dbl&gt;, n_cat &lt;dbl&gt;,
+## #   n_affix &lt;dbl&gt;, per_frame &lt;dbl&gt;, mlu &lt;dbl&gt;
+## [1] &quot;pred_sources1&quot;
+## [[1]]
+## [1] &quot;freq&quot;
+## 
+## [[2]]
+## [1] &quot;concreteness&quot; &quot;babiness&quot;    
+## 
+## [[3]]
+## [1] &quot;length_char&quot;
+## 
+## [[4]]
+## [1] &quot;n_type&quot;  &quot;n_cat&quot;   &quot;n_affix&quot;
+## 
+## [[5]]
+## [1] &quot;per_frame&quot;
+## 
+## [[6]]
+## [1] &quot;mlu&quot;
+## 
+## [1] &quot;pred_sources2&quot;
+## [[1]]
+## [1] &quot;freq&quot;
+## 
+## [[2]]
+## [1] &quot;concreteness&quot; &quot;babiness&quot;    
+## 
+## [[3]]
+## [1] &quot;length_char&quot;
+## 
+## [[4]]
+## [1] &quot;n_type&quot;  &quot;n_cat&quot;   &quot;n_affix&quot;
+## 
+## [[5]]
+## [1] &quot;per_frame&quot;
+## 
+## [[6]]
+## [1] &quot;mlu&quot;
+## 
+## Imputing Spanish (European) with 20 steps...
+## get predictor order.
+## get missing data
+## get imputation seed
+## pred_sources
+## freq
+## c(&quot;concreteness&quot;, &quot;babiness&quot;)
+## length_char
+## c(&quot;n_type&quot;, &quot;n_cat&quot;, &quot;n_affix&quot;)
+## per_frame
+## mlu
+## do iterate imputation
+## do scaling
+## [1] &quot;language&quot;
+## [1] &quot;Spanish (Mexican)&quot;
+## [1] &quot;data&quot;
+## # A tibble: 349 × 12
+##    uni_lemma lexical_category category    freq concreteness babiness length_char
+##    &lt;chr&gt;     &lt;fct&gt;            &lt;chr&gt;      &lt;dbl&gt;        &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt;
+##  1 a         function_words   articles   NA            1.46     3.45       NA   
+##  2 a lot     function_words   quantifie… -9.44         2.37    NA           7   
+##  3 again     function_words   quantifie… NA            2       NA          NA   
+##  4 airplane  nouns            vehicles   NA            4.96    NA          NA   
+##  5 all       function_words   quantifie… NA            2.27     2.19       NA   
+##  6 already   function_words   quantifie… NA            1.64    NA          NA   
+##  7 also      function_words   quantifie… NA            1.83    NA          NA   
+##  8 angry     predicates       descripti… NA            2.53    NA          NA   
+##  9 animal    nouns            animals    -4.80         4.61     4.89        7.58
+## 10 ant       nouns            animals    NA            4.86     1.6        NA   
+## # … with 339 more rows, and 5 more variables: n_type &lt;dbl&gt;, n_cat &lt;dbl&gt;,
+## #   n_affix &lt;dbl&gt;, per_frame &lt;dbl&gt;, mlu &lt;dbl&gt;
+## [1] &quot;pred_sources1&quot;
+## [[1]]
+## [1] &quot;freq&quot;
+## 
+## [[2]]
+## [1] &quot;concreteness&quot; &quot;babiness&quot;    
+## 
+## [[3]]
+## [1] &quot;length_char&quot;
+## 
+## [[4]]
+## [1] &quot;n_type&quot;  &quot;n_cat&quot;   &quot;n_affix&quot;
+## 
+## [[5]]
+## [1] &quot;per_frame&quot;
+## 
+## [[6]]
+## [1] &quot;mlu&quot;
+## 
+## [1] &quot;pred_sources2&quot;
+## [[1]]
+## [1] &quot;freq&quot;
+## 
+## [[2]]
+## [1] &quot;concreteness&quot; &quot;babiness&quot;    
+## 
+## [[3]]
+## [1] &quot;length_char&quot;
+## 
+## [[4]]
+## [1] &quot;n_type&quot;  &quot;n_cat&quot;   &quot;n_affix&quot;
+## 
+## [[5]]
+## [1] &quot;per_frame&quot;
+## 
+## [[6]]
+## [1] &quot;mlu&quot;
+## 
+## Imputing Spanish (Mexican) with 20 steps...
+## get predictor order.
+## get missing data
+## get imputation seed
+## pred_sources
+## freq
+## c(&quot;concreteness&quot;, &quot;babiness&quot;)
+## length_char
+## c(&quot;n_type&quot;, &quot;n_cat&quot;, &quot;n_affix&quot;)
+## per_frame
+## mlu
+## do iterate imputation
+## do scaling
+## [1] &quot;language&quot;
+## [1] &quot;Swedish&quot;
+## [1] &quot;data&quot;
+## # A tibble: 328 × 12
+##    uni_lemma   lexical_category category  freq concreteness babiness length_char
+##    &lt;chr&gt;       &lt;fct&gt;            &lt;chr&gt;    &lt;dbl&gt;        &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt;
+##  1 airplane    nouns            vehicles    NA         4.96    NA             NA
+##  2 all         function_words   quantif…    NA         2.27     2.19          NA
+##  3 all gone    predicates       descrip…    NA         2.04    NA             NA
+##  4 animal      nouns            animals     NA         4.61     4.89          NA
+##  5 another     function_words   quantif…    NA         2.69     2.13          NA
+##  6 apple       nouns            food_dr…    NA         5        3.5           NA
+##  7 arm         nouns            body_pa…    NA         4.96     4.3           NA
+##  8 asleep      predicates       descrip…    NA         3.71     7.19          NA
+##  9 away        function_words   locatio…    NA         2.23     1.92          NA
+## 10 back (loca… function_words   locatio…    NA         4.33     3.5           NA
+## # … with 318 more rows, and 5 more variables: n_type &lt;dbl&gt;, n_cat &lt;dbl&gt;,
+## #   n_affix &lt;dbl&gt;, per_frame &lt;dbl&gt;, mlu &lt;dbl&gt;
+## [1] &quot;pred_sources1&quot;
+## [[1]]
+## [1] &quot;freq&quot;
+## 
+## [[2]]
+## [1] &quot;concreteness&quot; &quot;babiness&quot;    
+## 
+## [[3]]
+## [1] &quot;length_char&quot;
+## 
+## [[4]]
+## [1] &quot;n_type&quot;  &quot;n_cat&quot;   &quot;n_affix&quot;
+## 
+## [[5]]
+## [1] &quot;per_frame&quot;
+## 
+## [[6]]
+## [1] &quot;mlu&quot;
+## 
+## [1] &quot;pred_sources2&quot;
+## [[1]]
+## [1] &quot;freq&quot;
+## 
+## [[2]]
+## [1] &quot;concreteness&quot; &quot;babiness&quot;    
+## 
+## [[3]]
+## [1] &quot;length_char&quot;
+## 
+## [[4]]
+## [1] &quot;n_type&quot;  &quot;n_cat&quot;   &quot;n_affix&quot;
+## 
+## [[5]]
+## [1] &quot;per_frame&quot;
+## 
+## [[6]]
+## [1] &quot;mlu&quot;
+## 
+## Imputing Swedish with 20 steps...
+## get predictor order.
+## get missing data
+## get imputation seed
+## pred_sources
+## freq
+## c(&quot;concreteness&quot;, &quot;babiness&quot;)
+## length_char
+## c(&quot;n_type&quot;, &quot;n_cat&quot;, &quot;n_affix&quot;)
+## per_frame
+## mlu
+## do iterate imputation
+## do scaling
+## [1] &quot;language&quot;
+## [1] &quot;Turkish&quot;
+## [1] &quot;data&quot;
+## # A tibble: 343 × 12
+##    uni_lemma   lexical_category category  freq concreteness babiness length_char
+##    &lt;chr&gt;       &lt;fct&gt;            &lt;chr&gt;    &lt;dbl&gt;        &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt;
+##  1 again       function_words   quantif…    NA         2       NA             NA
+##  2 airplane    nouns            vehicles    NA         4.96    NA             NA
+##  3 all         function_words   quantif…    NA         2.27     2.19          NA
+##  4 ambulance   nouns            vehicles    NA         4.81    NA             NA
+##  5 apple       nouns            food_dr…    NA         5        3.5           NA
+##  6 armchair    nouns            furnitu…    NA         5       NA             NA
+##  7 back (loca… function_words   locatio…    NA         4.33     3.5           NA
+##  8 ball        nouns            toys        NA         5        6             NA
+##  9 balloon     nouns            toys        NA         4.92     6.55          NA
+## 10 banana      nouns            food_dr…    NA         5        3.08          NA
+## # … with 333 more rows, and 5 more variables: n_type &lt;dbl&gt;, n_cat &lt;dbl&gt;,
+## #   n_affix &lt;dbl&gt;, per_frame &lt;dbl&gt;, mlu &lt;dbl&gt;
+## [1] &quot;pred_sources1&quot;
+## [[1]]
+## [1] &quot;freq&quot;
+## 
+## [[2]]
+## [1] &quot;concreteness&quot; &quot;babiness&quot;    
+## 
+## [[3]]
+## [1] &quot;length_char&quot;
+## 
+## [[4]]
+## [1] &quot;n_type&quot;  &quot;n_cat&quot;   &quot;n_affix&quot;
+## 
+## [[5]]
+## [1] &quot;per_frame&quot;
+## 
+## [[6]]
+## [1] &quot;mlu&quot;
+## 
+## [1] &quot;pred_sources2&quot;
+## [[1]]
+## [1] &quot;freq&quot;
+## 
+## [[2]]
+## [1] &quot;concreteness&quot; &quot;babiness&quot;    
+## 
+## [[3]]
+## [1] &quot;length_char&quot;
+## 
+## [[4]]
+## [1] &quot;n_type&quot; &quot;n_cat&quot; 
+## 
+## [[5]]
+## [1] &quot;per_frame&quot;
+## 
+## [[6]]
+## [1] &quot;mlu&quot;
+## 
+## Imputing Turkish with 20 steps...
+## get predictor order.
+## get missing data
+## get imputation seed
+## pred_sources
+## freq
+## c(&quot;concreteness&quot;, &quot;babiness&quot;)
+## length_char
+## c(&quot;n_type&quot;, &quot;n_cat&quot;)
+## per_frame
+## mlu
+## do iterate imputation
+## do scaling</code></pre>
 </div>
 <div id="merge-with-aoas" class="section level2">
 <h2>Merge with AOAs</h2>
 </div>
 <div id="run-model" class="section level2">
 <h2>Run model</h2>
+<pre><code>## [1] &quot;Spanish (Mexican)&quot;
+## [1] &quot;Spanish (European)&quot;
+## [1] &quot;German&quot;
+## [1] &quot;English (American)&quot;
+## [1] &quot;Italian&quot;
+## [1] &quot;Norwegian&quot;
+## [1] &quot;Turkish&quot;
+## [1] &quot;Swedish&quot;
+## [1] &quot;Danish&quot;
+## [1] &quot;Dutch&quot;
+## [1] &quot;French (French)&quot;
+## [1] &quot;French (Quebecois)&quot;
+## [1] &quot;Portuguese (European)&quot;
+## [1] &quot;Hungarian&quot;</code></pre>
+</div>
+<div id="add-per_frame-feature-only-for-verbs" class="section level2">
+<h2>Add per_frame feature only for verbs</h2>
+<pre><code>## [1] &quot;Spanish (Mexican)&quot;
+## [1] &quot;Spanish (European)&quot;
+## [1] &quot;German&quot;
+## [1] &quot;English (American)&quot;
+## [1] &quot;Italian&quot;
+## [1] &quot;Norwegian&quot;
+## [1] &quot;Turkish&quot;
+## [1] &quot;Swedish&quot;
+## [1] &quot;Danish&quot;
+## [1] &quot;French (French)&quot;
+## [1] &quot;French (Quebecois)&quot;
+## [1] &quot;Portuguese (European)&quot;</code></pre>
 </div>
 <div id="model-outputs" class="section level2">
 <h2>Model outputs</h2>
 <p>Coefficients:</p>
-<pre><code>## # A tibble: 288 × 7
-## # Groups:   language [4]
-##    language measure  term               estimate std.error statistic  p.value
-##    &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;                 &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-##  1 Italian  produces (Intercept)       26.5          0.241 110.      0       
-##  2 Italian  produces freq              -2.53         0.178 -14.2     9.47e-43
-##  3 Italian  produces lexical_category1 -1.57         0.297  -5.29    1.44e- 7
-##  4 Italian  produces lexical_category2 -0.942        0.258  -3.66    2.63e- 4
-##  5 Italian  produces freq_solo          0.782        0.160   4.89    1.16e- 6
-##  6 Italian  produces freq_last          0.438        0.164   2.68    7.51e- 3
-##  7 Italian  produces freq_first        -0.305        0.156  -1.95    5.17e- 2
-##  8 Italian  produces concreteness      -1.12         0.188  -5.96    3.19e- 9
-##  9 Italian  produces babiness          -0.000350     0.113  -0.00310 9.98e- 1
-## 10 Italian  produces length_char        0.450        0.125   3.61    3.22e- 4
-## # … with 278 more rows</code></pre>
+<pre><code>## # A tibble: 19,062 × 7
+##    language          measure  term         estimate std.error statistic  p.value
+##    &lt;chr&gt;             &lt;chr&gt;    &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+##  1 Spanish (Mexican) produces (Intercept)  25.9       2.38       10.9   5.00e-24
+##  2 Spanish (Mexican) produces freq         -0.197     0.0605     -3.26  1.21e- 3
+##  3 Spanish (Mexican) produces lexical_cat…  8.75      3.95        2.21  2.75e- 2
+##  4 Spanish (Mexican) produces lexical_cat…  0.475     3.12        0.152 8.79e- 1
+##  5 Spanish (Mexican) produces concreteness -0.791     0.411      -1.92  5.51e- 2
+##  6 Spanish (Mexican) produces babiness     -0.226     0.116      -1.94  5.27e- 2
+##  7 Spanish (Mexican) produces length_char   0.118     0.0716      1.65  1.00e- 1
+##  8 Spanish (Mexican) produces n_type       -0.00676   0.00747    -0.906 3.66e- 1
+##  9 Spanish (Mexican) produces n_cat         0.0123    0.00983     1.26  2.10e- 1
+## 10 Spanish (Mexican) produces n_affix      -0.00388   0.00762    -0.509 6.11e- 1
+## # … with 19,052 more rows</code></pre>
 <p>Summary stats:</p>
-<pre><code>## # A tibble: 8 × 14
-## # Groups:   language [4]
-##   language       measure r.squared adj.r.squared sigma statistic   p.value    df
-##   &lt;chr&gt;          &lt;chr&gt;       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;
-## 1 Italian        produc…     0.546         0.534  1.93      43.2 2.38e-188    35
-## 2 Italian        unders…     0.493         0.479  2.78      34.7 7.75e-158    35
-## 3 French (Frenc… produc…     0.490         0.478  2.67      41.1 2.11e-191    35
-## 4 French (Frenc… unders…     0.391         0.377  3.98      28.1 1.10e-138    35
-## 5 Spanish (Mexi… produc…     0.408         0.393  2.19      28.8 4.87e-140    35
-## 6 Spanish (Mexi… unders…     0.311         0.294  2.65      18.5 4.07e- 92    35
-## 7 English (Amer… produc…     0.693         0.686  1.97     106.  0            35
-## 8 English (Amer… unders…     0.458         0.441  2.60      27.4 1.26e-125    35
-## # … with 6 more variables: logLik &lt;dbl&gt;, AIC &lt;dbl&gt;, BIC &lt;dbl&gt;, deviance &lt;dbl&gt;,
-## #   df.residual &lt;int&gt;, nobs &lt;int&gt;</code></pre>
+<pre><code>## # A tibble: 1,296 × 14
+##    language measure r.squared adj.r.squared sigma statistic p.value    df logLik
+##    &lt;chr&gt;    &lt;chr&gt;       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+##  1 Spanish… produc…     0.206         0.143  2.67      3.25 1.09e-7    29  -928.
+##  2 Spanish… produc…     0.206         0.143  2.67      3.25 1.09e-7    29  -928.
+##  3 Spanish… produc…     0.206         0.143  2.67      3.25 1.09e-7    29  -928.
+##  4 Spanish… produc…     0.206         0.143  2.67      3.25 1.09e-7    29  -928.
+##  5 Spanish… produc…     0.206         0.143  2.67      3.25 1.09e-7    29  -928.
+##  6 Spanish… produc…     0.206         0.143  2.67      3.25 1.09e-7    29  -928.
+##  7 Spanish… produc…     0.206         0.143  2.67      3.25 1.09e-7    29  -928.
+##  8 Spanish… produc…     0.206         0.143  2.67      3.25 1.09e-7    29  -928.
+##  9 Spanish… produc…     0.206         0.143  2.67      3.25 1.09e-7    29  -928.
+## 10 Spanish… produc…     0.206         0.143  2.67      3.25 1.09e-7    29  -928.
+## # … with 1,286 more rows, and 5 more variables: AIC &lt;dbl&gt;, BIC &lt;dbl&gt;,
+## #   deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;</code></pre>
 <p>Variance inflation factors:</p>
-<pre><code>## # A tibble: 184 × 6
-## # Groups:   language [4]
-##    language measure  predictor          gvif    df `gvif^(1/(2*df))`
-##    &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;             &lt;dbl&gt; &lt;dbl&gt;             &lt;dbl&gt;
-##  1 Italian  produces freq              15.3      1              3.92
-##  2 Italian  produces lexical_category 154.       2              3.52
-##  3 Italian  produces freq_solo         10.2      1              3.19
-##  4 Italian  produces freq_last         15.4      1              3.92
-##  5 Italian  produces freq_first         8.18     1              2.86
-##  6 Italian  produces concreteness      16.8      1              4.10
-##  7 Italian  produces babiness           4.45     1              2.11
-##  8 Italian  produces length_char        6.11     1              2.47
-##  9 Italian  produces n_type             1.91     1              1.38
-## 10 Italian  produces n_sfx              2.62     1              1.62
-## # … with 174 more rows</code></pre>
 </div>
 <div id="cross-validation" class="section level2">
 <h2>Cross-validation</h2>
