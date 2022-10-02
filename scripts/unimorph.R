@@ -22,7 +22,9 @@ morphnet_extract <- function(childes_lang){
   }
 
   d <- file.path(glue("data/unimorph_{childes_lang}_der.tsv"))
+  if (!(childes_lang=="rus")){
   unimorph_dev <- read.csv(d, sep = "\t")
+  }
 
   childes<- get_childes_data({childes_lang}, corpus_args)
   if (childes_lang == "eng"){
@@ -76,18 +78,21 @@ corpus["prefix_m"] = ""
 corpus <- corpus |>
   distinct()
 
+corpus['der_morpheme'] <- NA
+
+if (!(childes_lang == "rus")){
 
 colnames(unimorph_dev) <- c("stem","gloss","pos", "pos1", "der_morpheme" ,"prefix")
 
 unimorph_dev<- unimorph_dev |>
   mutate(der_morpheme = ifelse(der_morpheme=="", NA, TRUE))
 
-
 unimorph_dev<- unimorph_dev |>
   mutate(prefix = ifelse(prefix=="prefix", TRUE, NA))
 
 corpus <- corpus|>
   left_join(unimorph_dev)
+}
 
 corpus <- corpus |>
   mutate(n_morpheme = ifelse(is.na(der_morpheme), n_morpheme , n_morpheme+1))

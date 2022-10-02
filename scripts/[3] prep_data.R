@@ -59,8 +59,11 @@ residualize_morph <- function(lang, childes_metrics) {
   a <- childes_metrics |>
     filter(language == lang) |>
     filter(!is.na(n_type)) |>
-    filter(!is.na(n_cat)) |>
+    filter(!is.na(n_cat))
+  if (!(all(is.na(a[,"n_cat"])))) {
+    a<- a|>
     mutate(across(starts_with("n_cat"), partial(residualize_col, n_type)))
+  }
   f<- childes_metrics |>
    filter(language == lang) |>
    select(-n_cat, -n_type) |>
@@ -119,6 +122,7 @@ do_iterate_imputation <- function(pred_sources, imputation_data, missing) {
   prediction_list <- unlist(pred_sources)
   # iterates through the predictor list for that language
   for (pred in prediction_list) {
+
     imputation_fits <- fit_predictor(pred, imputation_data, pred_sources)
     imputation_data <- missing |>
       select(uni_lemma, lexical_category, category, !!pred) |>
@@ -137,18 +141,41 @@ do_iterate_imputation <- function(pred_sources, imputation_data, missing) {
 do_lang_imputation <- function(language, data, pred_sources, max_steps) {
   # if all the predictors are from one source, fix the pred_sources
   if (length(pred_sources) == 1) pred_sources <- unlist(pred_sources)
-  data[colSums(!is.na(data)) > 0]
-  predictors <- unlist(pred_sources)
-  if (language %in% l_with_n_affix){
-    message(glue(" {language} containing data for n_affix."))
+  #data[colSums(!is.na(data)) > 0]
+  data<- data |> distinct()
+  print("language")
+  print(language)
+  print("data")
+  print(data)
+  #predictors <- unlist(pred_sources)
+  #if (language %in% l_with_n_affix){
+  #  message(glue(" {language} containing data for n_affix."))
+  #
+  #  predictors <- unlist(pred_sources)
+  #} else{
+  #  message(glue(" {language} not containing data for n_affix."))
+  #  pred_sources[[4]] = pred_sources[[4]][pred_sources[[4]]!="n_affix"]
+  #  predictors <- unlist(pred_sources)
+  #  predictors = predictors[predictors!= "n_affix"]
+  #}
+  print("pred_sources1")
+  print(pred_sources)
 
-    predictors <- unlist(pred_sources)
-  } else{
-    message(glue(" {language} not containing data for n_affix."))
-    pred_sources[[4]] = pred_sources[[4]][pred_sources[[4]]!="n_affix"]
-    predictors <- unlist(pred_sources)
-    predictors = predictors[predictors!= "n_affix"]
-    }
+  if (all(is.na(data[,"n_type"]))) {    pred_sources[[4]] =
+    pred_sources[[4]][pred_sources[[4]]!="n_type"]
+  }
+  if (all(is.na(data[,"n_affix"]))) {    pred_sources[[4]] =
+    pred_sources[[4]][pred_sources[[4]]!="n_affix"]
+  }
+  if (all(is.na(data[,"n_cat"]))) {    pred_sources[[4]] =
+    pred_sources[[4]][pred_sources[[4]]!="n_cat"]
+  }
+  if (all(is.na(data[,"per_frame"]))) {    pred_sources[[5]] =
+    pred_sources[[5]][pred_sources[[5]]!="per_frame"]
+  }
+  print("pred_sources2")
+  print(pred_sources)
+  predictors <- unlist(pred_sources)
   print(glue("Imputing {language} with {max_steps} steps..."))
   predictor_list <- get_predictor_order(data, predictors, max_steps)
   print(glue("get predictor order."))

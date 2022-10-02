@@ -3,8 +3,8 @@ get_inst_admins <- function(language, form, exclude_longitudinal = TRUE) {
 
   admins <- get_administration_data(language = language,
                                     form = form,
-                                    db_args = db_args)
-
+                                    #db_args = db_args)
+                                    )
   if (exclude_longitudinal) {
     # take earliest administration for any child with multiple administrations
     admins <- admins |>
@@ -21,7 +21,8 @@ get_inst_words <- function(language, form) {
   message(glue("Getting words for {language} {form}..."))
   get_item_data(language = language,
                 form = form,
-                db_args = db_args) |>
+                #db_args = db_args
+                ) |>
     filter(item_kind == "word") |>
     select(language, form, lexical_class, category, uni_lemma, item_definition,
            item_id)
@@ -39,7 +40,8 @@ get_inst_data <- function(language, form, admins, items,
                                    items = items$item_id,
                                    administration_info = admins,
                                    item_info = items,
-                                   db_args = db_args) |>
+                                   #db_args = db_args)
+                                   )|>
     select(-value) |>
     pivot_longer(names_to = "measure", values_to = "value",
                  cols = c(produces, understands)) |>
@@ -100,7 +102,7 @@ create_inst_data <- function(language, form, custom_unilemmas = TRUE) {
 
 create_wb_data <- function(language, write = TRUE, custom_unilemmas = TRUE) {
   lang <- language # for filter name scope issues
-  insts <- get_instruments(db_args = db_args)
+  insts <- get_instruments()#db_args = db_args)
   forms <- insts |> filter(language == lang) |> pull(form)
   if (length(forms) == 0) {
     message(glue("\tNo instruments found for language {lang}, skipping."))
@@ -160,4 +162,5 @@ extract_uni_lemmas <- function(lang, wb_data) {
       rename(item_definition = definition)
   }else{
   }
+
 }
